@@ -1,0 +1,7 @@
+{{ ansible_managed | comment }}
+
+{{ item.path }} {
+    {{ item.frequency | default(omit) }}
+{% if item.compress %}    compress{% endif %}
+    {{ item.keep | default(omit) }}
+}

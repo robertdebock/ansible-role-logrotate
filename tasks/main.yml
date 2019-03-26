@@ -1,0 +1,35 @@
+---
+# tasks file for logrotate
+- name: install logrotate
+  package:
+    name: "{{ logrotate_packages }}"
+    state: present
+  register: logrotate_install_logrotate
+  until: logrotate_install_logrotate is succeeded
+  retries: 3
+
+- name: configure logrotate
+  template:
+    src: "{{ logrotate_config_file }}.j2"
+    dest: "{{ logrotate_config_directory }}/{{ logrotate_config_file }}"
+  notify:
+    - restart logrotate
+
+- name: generate logrotate.d files
+  template:
+    src: entry.j2
+    dest: "{{ logrotate_confd_directory }}/{{ item.name }}"
+  with_items:
+    - "{{ logrotate_entries }}"
+  when:
+    - logrotate_entries is defined
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: start and enable logrotate
+  service:
+    name: "{{ logrotate_service }}"
+    state: started
+    enabled: yes
+  when:
+    - ansible_virtualization_type != "docker"

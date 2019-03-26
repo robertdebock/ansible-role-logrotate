@@ -1,0 +1,18 @@
+---
+# defaults file for logrotate
+
+# How often to rotate logs, either daily, weekly or monthly.
+logrotate_frequency: weekly
+
+# How many files to keep.
+logrotate_keep: 4
+
+# Should rotated logs be compressed??
+logrotate_compress: yes
+
+logrotate_entries:
+  - name: example
+    path: "/var/log/example/*.log"
+    frequency: daily
+    keep: 7
+    compress: no

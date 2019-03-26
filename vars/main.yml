@@ -1,0 +1,16 @@
+---
+# vars file for logrotate
+_logrotate_packages:
+  default:
+    - logrotate
+
+logrotate_packages: "{{ _logrotate_packages[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_logrotate_packages[ansible_distribution] | default(_logrotate_packages['default'])) }}"
+
+_logrotate_config_directory:
+  default: /etc
+
+logrotate_config_directory: "{{ _logrotate_config_directory[ansible_distribution] | default(_logrotate_config_directory['default']) }}"
+
+logrotate_config_file: logrotate.conf
+
+logrotate_confd_directory: "{{ logrotate_config_directory }}/logrotate.d"

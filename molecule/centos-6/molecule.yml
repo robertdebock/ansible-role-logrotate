@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+lint:
+  name: yamllint
+driver:
+  name: docker
+platforms:
+  - name: logrotate-centos-6
+    image: centos:6
+    pre_build_image: yes
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../resources/prepare.yml
+    converge: ../resources/playbook.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: centos-6

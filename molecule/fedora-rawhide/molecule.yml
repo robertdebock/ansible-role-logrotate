@@ -1,0 +1,24 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+lint:
+  name: yamllint
+driver:
+  name: docker
+platforms:
+  - name: logrotate-fedora-rawhide
+    image: fedora:rawhide
+    pre_build_image: yes
+    registry:
+      url: registry.fedoraproject.org
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../resources/prepare.yml
+    converge: ../resources/playbook.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: fedora-rawhide
