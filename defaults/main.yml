@@ -9,10 +9,3 @@ logrotate_keep: 4
 
 # Should rotated logs be compressed??
 logrotate_compress: yes
-
-logrotate_entries:
-  - name: example
-    path: "/var/log/example/*.log"
-    frequency: daily
-    keep: 7
-    compress: no

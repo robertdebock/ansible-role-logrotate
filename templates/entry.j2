@@ -1,7 +1,8 @@
 {{ ansible_managed | comment }}
 
 {{ item.path }} {
-    {{ item.frequency | default(omit) }}
-{% if item.compress %}    compress{% endif %}
-    {{ item.keep | default(omit) }}
+{% if item.frequency is defined %}    {{ item.frequency }}{% endif %}
+{% if item.compress is defined %}{% if item.compress %}    compress{% endif %}{% endif %}
+{% if item.keep is defined %}    rotate {{ item.keep }}{% endif %}
+
 }

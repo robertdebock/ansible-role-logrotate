@@ -16,6 +16,26 @@ This example is taken from `molecule/default/playbook.yml`:
   become: yes
   gather_facts: yes
 
+  vars:
+    logrotate_frequency: daily
+    logrotate_keep: 7
+    logrotate_compress: yes
+    logrotate_entries:
+      - name: example
+        path: "/var/log/example/*.log"
+      - name: example-frequency
+        path: "/var/log/example-frequency/*.log"
+        frequency: weekly
+      - name: example-keep
+        path: "/var/log/example-keep/*.log"
+        keep: 14
+      - name: example-compress-yes
+        path: "/var/log/example-compress/*.log"
+        compress: yes
+      - name: example-compress-no
+        path: "/var/log/example-compress/*.log"
+        compress: no
+
   roles:
     - robertdebock.logrotate
 ```
@@ -50,13 +70,6 @@ logrotate_keep: 4
 
 # Should rotated logs be compressed??
 logrotate_compress: yes
-
-logrotate_entries:
-  - name: example
-    path: "/var/log/example/*.log"
-    frequency: daily
-    keep: 7
-    compress: no
 ```
 
 Requirements
