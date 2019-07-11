@@ -25,9 +25,6 @@ platforms:
   - name: logrotate-centos-latest
     image: centos:latest
     pre_build_image: yes
-  - name: logrotate-debian-latest
-    image: debian:latest
-    pre_build_image: yes
   - name: logrotate-debian-stable
     image: debian:stable
     pre_build_image: yes
