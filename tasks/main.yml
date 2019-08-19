@@ -25,11 +25,3 @@
     - logrotate_entries is defined
   loop_control:
     label: "{{ item.name }}"
-
-- name: start and enable logrotate
-  service:
-    name: "{{ logrotate_service }}"
-    state: started
-    enabled: yes
-  when:
-    - ansible_virtualization_type != "docker"

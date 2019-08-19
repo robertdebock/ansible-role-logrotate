@@ -5,4 +5,5 @@
   gather_facts: no
 
   roles:
-    - robertdebock.bootstrap
+    - role: robertdebock.bootstrap
+    - role: robertdebock.cron
