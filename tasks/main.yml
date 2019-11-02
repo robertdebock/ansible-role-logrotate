@@ -12,8 +12,6 @@
   template:
     src: "{{ logrotate_config_file }}.j2"
     dest: "{{ logrotate_config_directory }}/{{ logrotate_config_file }}"
-  notify:
-    - restart logrotate
 
 - name: generate logrotate.d files
   template:

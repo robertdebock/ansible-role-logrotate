@@ -1,8 +1,0 @@
----
-# handlers file for logrotate
-- name: restart logrotate
-  service:
-    name: "{{ logrotate_service }}"
-    state: restarted
-  when:
-    - ansible_virtualization_type != "docker"
