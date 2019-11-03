@@ -175,7 +175,6 @@ This role uses the following modules:
 ```yaml
 ---
 - package
-- service
 - template
 ```
 
