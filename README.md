@@ -109,7 +109,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |amazonlinux|latest|no|
 |alpine|latest|no|
 |alpine|edge|yes|
-|debian|stable|yes|
 |debian|unstable|yes|
 |debian|latest|no|
 |centos|7|no|
@@ -117,8 +116,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |fedora|latest|no|
 |fedora|rawhide|yes|
 |opensuse|latest|no|
-|ubuntu|rolling|yes|
-|ubuntu|devel|yes|
 |ubuntu|latest|no|
 
 This role has been tested on these Ansible versions:
