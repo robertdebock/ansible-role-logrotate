@@ -39,7 +39,6 @@ galaxy_info:
     - logrotate
     - archlinux
     - centos
-    - debian
     - el
     - fedora
     - opensuse
