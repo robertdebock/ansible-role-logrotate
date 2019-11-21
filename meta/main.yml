@@ -37,7 +37,6 @@ galaxy_info:
 
   galaxy_tags:
     - logrotate
-    - alpine
     - archlinux
     - centos
     - debian
