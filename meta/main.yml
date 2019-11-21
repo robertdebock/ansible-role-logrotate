@@ -40,6 +40,5 @@ galaxy_info:
     - archlinux
     - centos
     - rhel
-    - ubuntu
 
 dependencies: []
