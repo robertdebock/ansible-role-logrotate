@@ -9,7 +9,7 @@ Install and configure logrotate on your system.
 Example Playbook
 ----------------
 
-This example is taken from `molecule/resources/playbook.yml`:
+This example is taken from `molecule/resources/playbook.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
 - name: Converge
@@ -41,7 +41,7 @@ This example is taken from `molecule/resources/playbook.yml`:
     - robertdebock.logrotate
 ```
 
-The machine you are running this on, may need to be prepared.
+The machine you are running this on, may need to be prepared, I use this playbook to ensure everything is in place to let the role work.
 ```yaml
 ---
 - name: Converge
@@ -53,6 +53,7 @@ The machine you are running this on, may need to be prepared.
     - role: robertdebock.bootstrap
     - role: robertdebock.cron
 ```
+
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
