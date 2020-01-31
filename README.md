@@ -56,6 +56,18 @@ The machine you are running this on, may need to be prepared, I use this playboo
     - role: robertdebock.cron
 ```
 
+After running this role, this playbook runs to verify that everything works, this may be a good example how you can use this role.
+```yaml
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: check if connection still works
+      ping:
+```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
