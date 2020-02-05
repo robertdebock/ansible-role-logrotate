@@ -17,8 +17,7 @@
   template:
     src: entry.j2
     dest: "{{ logrotate_confd_directory }}/{{ item.name }}"
-  with_items:
-    - "{{ logrotate_entries }}"
+  loop: "{{ logrotate_entries }}"
   when:
     - logrotate_entries is defined
   loop_control:
