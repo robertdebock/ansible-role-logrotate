@@ -37,7 +37,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         compress: no
 
   roles:
-    - robertdebock.logrotate
+    - role: robertdebock.logrotate
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:

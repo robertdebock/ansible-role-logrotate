@@ -25,4 +25,4 @@
         compress: no
 
   roles:
-    - ansible-role-logrotate
+    - role: ansible-role-logrotate
