@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: converge
   hosts: all
   become: yes
   gather_facts: yes
