@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: prepare
   hosts: all
   become: yes
   gather_facts: no
