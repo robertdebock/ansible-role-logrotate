@@ -108,7 +108,7 @@ Here is an overview of related roles:
 
 ## Compatibility
 
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
@@ -116,7 +116,7 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |amazon|2018.03|
 |el|7, 8|
 |debian|buster, bullseye|
-|fedora|31|
+|fedora|31, 32|
 |opensuse|all|
 |ubuntu|focal, bionic, xenial|
 
