@@ -83,6 +83,10 @@ logrotate_keep: 4
 
 # Should rotated logs be compressed??
 logrotate_compress: yes
+
+# User/Group for rotated log files
+logrotate_user: root
+logrotate_group: syslog
 ```
 
 ## [Requirements](#requirements)
