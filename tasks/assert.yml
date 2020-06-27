@@ -18,3 +18,15 @@
     that:
       - logrotate_compress is defined
       - logrotate_compress | type_debug == "bool"
+
+- name: test if logrotate_user is set correctly
+  assert:
+    that:
+      - logrotate_user is defined
+      - logrotate_user | length > 0
+
+- name: test if logrotate_group is set correctly
+  assert:
+    that:
+      - logrotate_group is defined
+      - logrotate_group | length > 0
