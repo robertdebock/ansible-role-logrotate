@@ -1,5 +1,8 @@
 ---
 # tasks file for logrotate
+- name: include assert.yml
+  include_tasks: assert.yml
+
 - name: install logrotate
   package:
     name: "{{ logrotate_packages }}"

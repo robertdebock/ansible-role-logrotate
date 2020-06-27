@@ -1,0 +1,20 @@
+---
+- name: test if logrotate_frequency is set correctly
+  assert:
+    that:
+      - logrotate_frequency is defined
+      - logrotate_frequency | length > 0
+      - logrotate_frequency in ["daily", "weekly", "monthly"]
+
+- name: test if logrotate_keep is set correctly
+  assert:
+    that:
+      - logrotate_keep is defined
+      - logrotate_keep | int
+      - logrotate_keep | int >= 0
+
+- name: test if logrotate_compress is set correctly
+  assert:
+    that:
+      - logrotate_compress is defined
+      - logrotate_compress | type_debug == "bool"
