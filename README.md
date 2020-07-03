@@ -20,6 +20,8 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
     logrotate_frequency: daily
     logrotate_keep: 7
     logrotate_compress: yes
+    logrotate_user: root
+    logrotate_group: syslog
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"
