@@ -7,9 +7,6 @@
   package:
     name: "{{ logrotate_packages }}"
     state: present
-  register: logrotate_install_logrotate
-  until: logrotate_install_logrotate is succeeded
-  retries: 3
 
 - name: configure logrotate
   template:
