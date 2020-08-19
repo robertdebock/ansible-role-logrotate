@@ -5,6 +5,7 @@
       - logrotate_frequency is defined
       - logrotate_frequency | length > 0
       - logrotate_frequency in ["daily", "weekly", "monthly"]
+    quiet: yes
 
 - name: test if logrotate_keep is set correctly
   assert:
@@ -12,21 +13,25 @@
       - logrotate_keep is defined
       - logrotate_keep | int
       - logrotate_keep | int >= 0
+    quiet: yes
 
 - name: test if logrotate_compress is set correctly
   assert:
     that:
       - logrotate_compress is defined
       - logrotate_compress | type_debug == "bool"
+    quiet: yes
 
 - name: test if logrotate_user is set correctly
   assert:
     that:
       - logrotate_user is defined
       - logrotate_user | length > 0
+    quiet: yes
 
 - name: test if logrotate_group is set correctly
   assert:
     that:
       - logrotate_group is defined
       - logrotate_group | length > 0
+    quiet: yes
