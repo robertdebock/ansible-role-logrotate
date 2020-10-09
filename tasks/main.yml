@@ -2,6 +2,7 @@
 # tasks file for logrotate
 - name: include assert.yml
   include_tasks: assert.yml
+  run_once: yes
 
 - name: install logrotate
   package:
