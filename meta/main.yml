@@ -37,7 +37,5 @@ galaxy_info:
 
   galaxy_tags:
     - logrotate
-    - centos
-    - redhat
 
 dependencies: []
