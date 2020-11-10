@@ -4,7 +4,7 @@
     that:
       - logrotate_frequency is defined
       - logrotate_frequency | length > 0
-      - logrotate_frequency in ["daily", "weekly", "monthly"]
+      - logrotate_frequency in [ "daily", "weekly", "monthly" ]
     quiet: yes
 
 - name: test if logrotate_keep is set correctly
