@@ -11,7 +11,7 @@
   assert:
     that:
       - logrotate_keep is defined
-      - logrotate_keep | int
+      - logrotate_keep is number
       - logrotate_keep | int >= 0
     quiet: yes
 
