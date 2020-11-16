@@ -3,7 +3,6 @@
   assert:
     that:
       - logrotate_frequency is defined
-      - logrotate_frequency | length > 0
       - logrotate_frequency in [ "daily", "weekly", "monthly" ]
     quiet: yes
 
@@ -26,12 +25,10 @@
   assert:
     that:
       - logrotate_user is defined
-      - logrotate_user | length > 0
     quiet: yes
 
 - name: test if logrotate_group is set correctly
   assert:
     that:
       - logrotate_group is defined
-      - logrotate_group | length > 0
     quiet: yes
