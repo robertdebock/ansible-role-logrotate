@@ -19,7 +19,7 @@
   assert:
     that:
       - logrotate_compress is defined
-      - logrotate_compress | type_debug == "bool"
+      - logrotate_compress is boolean
     quiet: yes
 
 - name: test if logrotate_user is set correctly
