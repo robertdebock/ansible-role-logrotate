@@ -1,4 +1,5 @@
 ---
+
 - name: test if logrotate_frequency is set correctly
   assert:
     that:
