@@ -4,6 +4,7 @@
   assert:
     that:
       - logrotate_frequency is defined
+      - logrotate_frequency is string
       - logrotate_frequency in [ "daily", "weekly", "monthly" ]
     quiet: yes
 
@@ -26,10 +27,12 @@
   assert:
     that:
       - logrotate_user is defined
+      - logrotate_user is string
     quiet: yes
 
 - name: test if logrotate_group is set correctly
   assert:
     that:
       - logrotate_group is defined
+      - logrotate_group is string
     quiet: yes
