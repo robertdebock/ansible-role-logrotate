@@ -96,7 +96,7 @@ The following roles are used to prepare a system. You may choose to prepare your
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
 Here is an overview of related roles:
-![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/logrotate.png "Dependency")
+![dependencies](https://raw.githubusercontent.com/robertdebock/ansible-role-logrotate/png/requirements.png "Dependencies")
 
 ## [Compatibility](#compatibility)
 
