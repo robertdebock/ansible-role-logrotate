@@ -7,18 +7,18 @@
   delegate_to: localhost
 
 - name: install logrotate
-  package:
+  ansible.builtin.package:
     name: "{{ logrotate_packages }}"
     state: present
 
 - name: configure logrotate
-  template:
+  ansible.builtin.template:
     src: "{{ logrotate_config_file }}.j2"
     dest: "{{ logrotate_config_directory }}/{{ logrotate_config_file }}"
     mode: "0644"
 
 - name: generate logrotate.d files
-  template:
+  ansible.builtin.template:
     src: entry.j2
     dest: "{{ logrotate_confd_directory }}/{{ item.name }}"
     mode: "0644"

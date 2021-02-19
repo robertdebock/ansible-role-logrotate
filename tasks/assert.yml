@@ -1,7 +1,7 @@
 ---
 
 - name: test if logrotate_frequency is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - logrotate_frequency is defined
       - logrotate_frequency is string
@@ -9,7 +9,7 @@
     quiet: yes
 
 - name: test if logrotate_keep is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - logrotate_keep is defined
       - logrotate_keep is number
@@ -17,21 +17,21 @@
     quiet: yes
 
 - name: test if logrotate_compress is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - logrotate_compress is defined
       - logrotate_compress is boolean
     quiet: yes
 
 - name: test if logrotate_user is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - logrotate_user is defined
       - logrotate_user is string
     quiet: yes
 
 - name: test if logrotate_group is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - logrotate_group is defined
       - logrotate_group is string
