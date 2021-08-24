@@ -4,10 +4,6 @@
 # rotate log files weekly
 {{ logrotate_frequency }}
 
-# use the syslog group by default, since this is the owning group
-# of /var/log/syslog.
-su {{ logrotate_user }} {{ logrotate_group }}
-
 # keep 4 weeks worth of backlogs
 rotate {{ logrotate_keep }}
 
@@ -23,20 +19,5 @@ compress
 
 # packages drop log rotation information into this directory
 include /etc/logrotate.d
-
-# no packages own wtmp, or btmp -- we'll rotate them here
-/var/log/wtmp {
-    missingok
-    monthly
-    create 0664 root utmp
-    rotate 1
-}
-
-/var/log/btmp {
-    missingok
-    monthly
-    create 0660 root utmp
-    rotate 1
-}
 
 # system-specific logs may be configured here
