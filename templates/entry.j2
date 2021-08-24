@@ -1,8 +1,23 @@
 {{ ansible_managed | comment }}
 
 {{ item.path }} {
+
 {% if item.frequency is defined %}    {{ item.frequency }}{% endif %}
-{% if item.compress is defined %}{% if item.compress %}    compress{% endif %}{% endif %}
+
+{% if item.compress is defined and item.compress %}    compress{% endif %}
+
 {% if item.keep is defined %}    rotate {{ item.keep }}{% endif %}
+
+{% if item.minsize is defined %}    minsize {{ item.minsize }}{% endif %}
+
+{% if item.missingok is defined and item.missingok %}    missingok{% endif %}
+
+{% if item.notifempty is defined and item.notifempty %}    notifempty{% endif %}
+
+{% if item.create is defined and item.create %}    create{% if item.create_mode is defined %} {{ item.create_mode }}{% endif %}{% if item.create_user is defined %} {{ item.create_user }}{% endif %}{% if item.create_group is defined %} {{ item.create_group }}{% endif %}{% endif %}
+
+{% if item.postrotate is defined %}    postrotate
+        {{ item.postrotate }}
+    endscript{% endif %}
 
 }

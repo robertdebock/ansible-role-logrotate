@@ -4,11 +4,11 @@ Install and configure logrotate on your system.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-logrotate/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-logrotate/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-logrotate/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-logrotate)|[![quality](https://img.shields.io/ansible/quality/39060)](https://galaxy.ansible.com/robertdebock/logrotate)|[![downloads](https://img.shields.io/ansible/role/d/39060)](https://galaxy.ansible.com/robertdebock/logrotate)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-logrotate.svg)](https://github.com/robertdebock/ansible-role-logrotate/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-logrotate/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-logrotate/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-logrotate/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-logrotate)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/logrotate)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/logrotate)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-logrotate.svg)](https://github.com/robertdebock/ansible-role-logrotate/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
-This example is taken from `molecule/resources/converge.yml` and is tested on each push, pull request and release.
+This example is taken from `molecule/default/converge.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
 - name: converge
@@ -31,18 +31,44 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
       - name: example-keep
         path: "/var/log/example-keep/*.log"
         keep: 14
-      - name: example-compress-yes
+      - name: example-compress
         path: "/var/log/example-compress/*.log"
         compress: yes
-      - name: example-compress-no
-        path: "/var/log/example-compress/*.log"
-        compress: no
+      - name: example-script
+        path: "/var/log/example-script/*.log"
+        postrotate: killall -HUP some_process_name
+      - name: btmp
+        path: /var/log/btmp
+        missingok: yes
+        frequency: monthly
+        create: yes
+        create_mode: "0660"
+        create_user: root
+        create_group: utmp
+        keep: 1
+      - name: wtmp
+        path: /var/log/wtmp
+        missingok: yes
+        frequency: monthly
+        create: yes
+        create_mode: "0664"
+        create_user: root
+        create_group: utmp
+        minsize: 1M
+        keep: 1
+      - name: dnf
+        path: /var/log/hawkey.log
+        missingok: yes
+        notifempty: yes
+        keep: 4
+        frequency: weekly
+        create: yes
 
   roles:
     - role: robertdebock.logrotate
 ```
 
-The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:
+The machine needs to be prepared in CI this is done using `molecule/default/prepare.yml`:
 ```yaml
 ---
 - name: prepare
@@ -53,6 +79,32 @@ The machine needs to be prepared in CI this is done using `molecule/resources/pr
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.cron
+
+  post_tasks:
+    - name: create log directory
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /var/log/example
+        - /var/log/example-frequency
+        - /var/log/example-keep
+        - /var/log/example-compress
+        - /var/log/example-script
+
+    - name: create log file
+      copy:
+        dest: "{{ item }}"
+        content: "example"
+      loop:
+        - /var/log/example/app.log
+        - /var/log/example-frequency/app.log
+        - /var/log/example-keep/app.log
+        - /var/log/example-compress/app.log
+        - /var/log/example-script/app.log
+        - /var/log/btmp
+        - /var/log/wtmp
+        - /var/log/hawkey.log
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
