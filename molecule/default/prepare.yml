@@ -10,7 +10,7 @@
 
   post_tasks:
     - name: create log directory
-      file:
+      ansible.builtin.file:
         path: "{{ item }}"
         state: directory
       loop:
@@ -21,7 +21,7 @@
         - /var/log/example-script
 
     - name: create log file
-      copy:
+      ansible.builtin.copy:
         dest: "{{ item }}"
         content: "example"
       loop:
