@@ -40,9 +40,10 @@
 - name: test if logrotate_entries is set correctly
   ansible.builtin.assert:
     that:
-      - logrotate_entries is defined
       - logrotate_entries is iterable
     quiet: yes
+  when:
+    - logrotate_entries is defined
 
 - name: test if mandatory items in logrotate_entries are set correctly
   ansible.builtin.assert:
@@ -55,6 +56,8 @@
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
+  when:
+    - logrotate_entries is defined
 
 - name: test if frequency in logrotate_entries is set correctly
   ansible.builtin.assert:
