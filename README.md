@@ -178,12 +178,6 @@ If you find issues, please register them in [GitHub](https://github.com/robertde
 
 Apache-2.0
 
-## [Contributors](#contributors)
-
-I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
-
-- [aisbergg](https://github.com/aisbergg)
-
 ## [Author Information](#author-information)
 
 [Robert de Bock](https://robertdebock.nl/)
