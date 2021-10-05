@@ -155,3 +155,14 @@
     label: "{{ item.name }}"
   when:
     - item.notifempty is defined
+
+- name: test if sharedscripts in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.sharedscripts is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.sharedscripts is defined

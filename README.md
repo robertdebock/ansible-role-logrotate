@@ -63,6 +63,9 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
         keep: 4
         frequency: weekly
         create: yes
+      - name: example-sharedscripts
+        path: "/var/log/example-sharedscripts/*.log"
+        sharedscripts: yes
 
   roles:
     - role: robertdebock.logrotate
@@ -158,7 +161,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |---------|----|
 |alpine|all|
 |amazon|Candidate|
-|el|8|
+|el|all|
 |debian|all|
 |fedora|all|
 |opensuse|all|

@@ -51,6 +51,9 @@
         keep: 4
         frequency: weekly
         create: yes
+      - name: example-sharedscripts
+        path: "/var/log/example-sharedscripts/*.log"
+        sharedscripts: yes
 
   roles:
     - role: ansible-role-logrotate
