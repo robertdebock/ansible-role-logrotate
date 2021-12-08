@@ -20,8 +20,6 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
     logrotate_frequency: daily
     logrotate_keep: 7
     logrotate_compress: yes
-    logrotate_user: root
-    logrotate_group: syslog
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"
@@ -130,9 +128,9 @@ logrotate_keep: 4
 # Should rotated logs be compressed??
 logrotate_compress: yes
 
-# User/Group for rotated log files
-logrotate_user: root
-logrotate_group: syslog
+# User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
+# logrotate_user: root
+# logrotate_group: syslog
 ```
 
 ## [Requirements](#requirements)
