@@ -14,5 +14,5 @@ _logrotate_user:
   default: root
 
 _logrotate_group:
-  default: syslog
+  default: root
   Debian: adm
