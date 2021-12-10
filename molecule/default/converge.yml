@@ -8,8 +8,6 @@
     logrotate_frequency: daily
     logrotate_keep: 7
     logrotate_compress: yes
-    logrotate_user: root
-    logrotate_group: syslog
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"

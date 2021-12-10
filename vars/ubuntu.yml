@@ -1,0 +1,3 @@
+---
+logrotate_user: root
+logrotate_group: adm
