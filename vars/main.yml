@@ -9,3 +9,10 @@ logrotate_config_directory: /etc
 logrotate_config_file: logrotate.conf
 
 logrotate_confd_directory: "{{ logrotate_config_directory }}/logrotate.d"
+
+_logrotate_user:
+  default: root
+
+_logrotate_group:
+  default: syslog
+  Debian: adm

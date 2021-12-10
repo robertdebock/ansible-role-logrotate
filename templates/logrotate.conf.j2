@@ -4,11 +4,9 @@
 # rotate log files weekly
 {{ logrotate_frequency }}
 
-{% if logrotate_user is defined and logrotate_group is defined %}
 # use the syslog group by default, since this is the owning group
 # of /var/log/syslog.
 su {{ logrotate_user }} {{ logrotate_group }}
-{% endif %}
 
 # keep 4 weeks worth of backlogs
 rotate {{ logrotate_keep }}

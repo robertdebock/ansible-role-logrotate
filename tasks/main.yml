@@ -1,18 +1,5 @@
 ---
 # tasks file for logrotate
-- name: gather os specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - files:
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower }}.yml"
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}.yml"
-        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
-        - "{{ ansible_distribution | lower }}.yml"
-        - "{{ ansible_os_family | lower }}.yml"
-      skip: yes
-  when:
-    - logrotate_user is not defined
-    - logrotate_group is not defined
 
 - name: import assert.yml
   ansible.builtin.import_tasks: assert.yml
