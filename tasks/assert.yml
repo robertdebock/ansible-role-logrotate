@@ -23,6 +23,13 @@
       - logrotate_compress is boolean
     quiet: yes
 
+- name: test if logrotate_dateext is set correctly
+  ansible.builtin.assert:
+    that:
+      - logrotate_dateext is defined
+      - logrotate_dateext is boolean
+    quiet: yes
+
 - name: test if logrotate_user is set correctly
   ansible.builtin.assert:
     that:
@@ -115,6 +122,17 @@
     label: "{{ item.name }}"
   when:
     - item.missingok is defined
+
+- name: test if nomissingok in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.nomissingok is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.nomissingok is defined
 
 - name: test if create_* in logrotate_entries is set correctly
   ansible.builtin.assert:
