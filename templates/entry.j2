@@ -12,6 +12,8 @@
 
 {% if item.missingok is defined and item.missingok %}    missingok{% endif %}
 
+{% if item.nomissingok is defined and item.nomissingok %}    nomissingok{% endif %}
+
 {% if item.notifempty is defined and item.notifempty %}    notifempty{% endif %}
 
 {% if item.create is defined and item.create %}    create{% if item.create_mode is defined %} {{ item.create_mode }}{% endif %}{% if item.create_user is defined %} {{ item.create_user }}{% endif %}{% if item.create_group is defined %} {{ item.create_group }}{% endif %}{% endif %}

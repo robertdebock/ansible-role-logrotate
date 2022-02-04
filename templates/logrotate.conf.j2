@@ -14,6 +14,13 @@ rotate {{ logrotate_keep }}
 # create new (empty) log files after rotating old ones
 create
 
+# add dateext
+{% if logrotate_dateext %}
+dateext
+{% else %}
+#dateext
+{% endif %}
+
 # uncomment this if you want your log files compressed
 {% if logrotate_compress %}
 compress
