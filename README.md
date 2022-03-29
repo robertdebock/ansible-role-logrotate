@@ -177,7 +177,6 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The development version.
 
 
-
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-logrotate/issues)
 
 ## [License](#license)
