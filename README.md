@@ -43,6 +43,8 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
         create_mode: "0660"
         create_user: root
         create_group: utmp
+        dateext: yes
+        dateformat: "-%Y-%m-%d"
         keep: 1
       - name: wtmp
         path: /var/log/wtmp
@@ -53,6 +55,8 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
         create_user: root
         create_group: utmp
         minsize: 1M
+        dateext: yes
+        dateformat: "-%Y%m%d"
         keep: 1
       - name: dnf
         path: /var/log/hawkey.log
