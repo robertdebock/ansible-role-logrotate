@@ -6,6 +6,8 @@
 
 {% if item.compress is defined and item.compress %}    compress{% endif %}
 
+{% if item.delaycompress is defined and item.delaycompress %}    delaycompress{% endif %}
+
 {% if item.keep is defined %}    rotate {{ item.keep }}{% endif %}
 
 {% if item.minsize is defined %}    minsize {{ item.minsize }}{% endif %}
