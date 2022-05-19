@@ -184,3 +184,25 @@
     label: "{{ item.name }}"
   when:
     - item.sharedscripts is defined
+
+- name: test if dateext in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.dateext is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.dateext is defined
+
+- name: test if dateformat in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.dateformat is string
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.dateformat is defined

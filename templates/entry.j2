@@ -20,6 +20,10 @@
 
 {% if item.sharedscripts is defined and item.sharedscripts %}    sharedscripts{% endif %}
 
+{% if item.dateext is defined and item.dateext %}    dateext{% endif %}
+
+{% if item.dateformat is defined and item.dateformat %}    dateformat {{ item.dateformat }}{% endif %}
+
 {% if item.postrotate is defined %}    postrotate
         {{ item.postrotate }}
     endscript{% endif %}
