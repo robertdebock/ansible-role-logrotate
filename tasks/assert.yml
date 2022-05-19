@@ -101,6 +101,17 @@
   when:
     - item.compress is defined
 
+- name: test if delaycompress in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.delaycompress is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.delaycompress is defined
+
 - name: test if postrotate in logrotate_entries is set correctly
   ansible.builtin.assert:
     that:
