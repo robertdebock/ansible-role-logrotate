@@ -18,6 +18,9 @@
         - /var/log/example-frequency
         - /var/log/example-keep
         - /var/log/example-compress
+        - /var/log/example-copy
+        - /var/log/example-copytruncate
+        - /var/log/example-delaycompress
         - /var/log/example-script
         - /var/log/example-sharedscripts
 
