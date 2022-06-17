@@ -185,16 +185,16 @@
   when:
     - item.notifempty is defined
 
-- name: test if copy in logrotate_entries is set correctly
+- name: test if copylog in logrotate_entries is set correctly
   ansible.builtin.assert:
     that:
-      - item.copy is boolean
+      - item.copylog is boolean
     quiet: yes
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - item.copy is defined
+    - item.copylog is defined
 
 - name: test if copytruncate in logrotate_entries is set correctly
   ansible.builtin.assert:

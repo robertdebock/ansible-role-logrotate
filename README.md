@@ -32,9 +32,9 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
       - name: example-compress
         path: "/var/log/example-compress/*.log"
         compress: yes
-      - name: example-copy
-        path: "/var/log/example-copy/*.log"
-        copy: yes
+      - name: example-copylog
+        path: "/var/log/example-copylog/*.log"
+        copylog: yes
       - name: example-copytruncate
         path: "/var/log/example-copytruncate/*.log"
         copytruncate: yes
