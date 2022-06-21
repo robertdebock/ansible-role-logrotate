@@ -104,6 +104,9 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
         - /var/log/example-frequency
         - /var/log/example-keep
         - /var/log/example-compress
+        - /var/log/example-copylog
+        - /var/log/example-copytruncate
+        - /var/log/example-delaycompress
         - /var/log/example-script
         - /var/log/example-sharedscripts
 
@@ -116,6 +119,9 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
         - /var/log/example-frequency/app.log
         - /var/log/example-keep/app.log
         - /var/log/example-compress/app.log
+        - /var/log/example-copylog/app.log
+        - /var/log/example-copytruncate/app.log
+        - /var/log/example-delaycompress/app.log
         - /var/log/example-script/app.log
         - /var/log/example-sharedscripts/app.log
         - /var/log/btmp
