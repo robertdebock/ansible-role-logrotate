@@ -101,6 +101,17 @@
   when:
     - item.compress is defined
 
+- name: test if delaycompress in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.delaycompress is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.delaycompress is defined
+
 - name: test if postrotate in logrotate_entries is set correctly
   ansible.builtin.assert:
     that:
@@ -173,6 +184,28 @@
     label: "{{ item.name }}"
   when:
     - item.notifempty is defined
+
+- name: test if copylog in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.copylog is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.copylog is defined
+
+- name: test if copytruncate in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.copytruncate is boolean
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.copytruncate is defined
 
 - name: test if sharedscripts in logrotate_entries is set correctly
   ansible.builtin.assert:
