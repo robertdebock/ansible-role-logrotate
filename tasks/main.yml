@@ -1,23 +1,23 @@
 ---
 # tasks file for logrotate
 
-- name: import assert.yml
+- name: Import assert.yml
   ansible.builtin.import_tasks: assert.yml
   run_once: yes
   delegate_to: localhost
 
-- name: install logrotate
+- name: Install logrotate
   ansible.builtin.package:
     name: "{{ logrotate_packages }}"
     state: present
 
-- name: configure logrotate
+- name: Configure logrotate
   ansible.builtin.template:
     src: "{{ logrotate_config_file }}.j2"
     dest: "{{ logrotate_config_directory }}/{{ logrotate_config_file }}"
     mode: "0644"
 
-- name: generate logrotate.d files
+- name: Generate logrotate.d files
   ansible.builtin.template:
     src: entry.j2
     dest: "{{ logrotate_confd_directory }}/{{ item.name }}"
