@@ -1,5 +1,4 @@
 ---
-
 - name: Test if logrotate_frequency is set correctly
   ansible.builtin.assert:
     that:
@@ -239,3 +238,17 @@
     label: "{{ item.name }}"
   when:
     - item.dateformat is defined
+
+- name: assert that variable logrotate_scheduling is daily or hourly
+  ansible.builtin.assert:
+    that:
+      - logrotate_scheduling in ["daily", "hourly"]
+    fail_msg: "logrotate_scheduling must be daily or hourly"
+    quiet: yes
+
+- name: assert that variable logrotate_set_scheduling is boolean
+  ansible.builtin.assert:
+    that:
+      - logrotate_set_scheduling is boolean
+    fail_msg: "logrotate_set_scheduling must be boolean"
+    quiet: yes

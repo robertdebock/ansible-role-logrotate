@@ -27,3 +27,49 @@
     - logrotate_entries is defined
   loop_control:
     label: "{{ item.name }}"
+
+- name: Generate cron or systemd timer scheduling
+  when: logrotate_set_scheduling
+  block:
+    - name: Check if systemd is active
+      ansible.builtin.stat:
+        path: /run/systemd/system
+      register: systemd_active
+      when: logrotate_schedule_force_cron is not defined or not logrotate_schedule_force_cron
+
+    - name: actions block when systemd is active
+      when: systemd_active.stat.exists
+      block:
+        - name: Generate systemd timer scheduling
+          ansible.builtin.template:
+            src: logrotate.timer.j2
+            dest: "{{ logrotate_systemd_timer_directory }}/logrotate.timer"
+            mode: "0644"
+
+        # - name: Enable logrotate timer
+        #   ansible.builtin.systemd:
+        #     name: logrotate.timer
+        #     state: started
+        #     enabled: yes
+        #   when:
+        #     - logrotate_schedule_file is defined
+        #     - logrotate_schedule_file == "logrotate.timer"
+
+        - name: Remove cron scheduling
+          ansible.builtin.file:
+            path: "{{ logrotate_cron_directory }}/{{ logrotate_scheduling }}/logrotate"
+            state: absent
+
+    - name: actions block when systemd is not active
+      when: not systemd_active.stat.exists or (logrotate_schedule_force_cron is defined and logrotate_schedule_force_cron)
+      block:
+        - name: Generate cron scheduling
+          ansible.builtin.template:
+            src: logrotate.cron.j2
+            dest: "{{ logrotate_cron_directory }}/{{ logrotate_scheduling }}/{{ logrotate_cron_filename }}"
+            mode: "0644"
+
+        - name: Remove cron schedule for not used schedule (daily/weekly)
+          ansible.builtin.file:
+            path: "{{ logrotate_cron_directory }}/{{ logrotate_scheduling == 'daily' | ternary('weekly', 'daily') }}/{{ logrotate_cron_filename }}"
+            state: absent
