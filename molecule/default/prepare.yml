@@ -41,3 +41,21 @@
         - /var/log/btmp
         - /var/log/wtmp
         - /var/log/hawkey.log
+
+    - name: create cron directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /etc/cron.daily
+        - /etc/cron.hourly
+        - /etc/cron.monthly
+        - /etc/cron.weekly
+
+    - name: create systemd timer directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /etc/systemd/system/timers.target.wants
+        - /etc/systemd/system/timers.target.requires
