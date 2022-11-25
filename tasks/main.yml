@@ -40,20 +40,31 @@
     - name: actions block when systemd is active
       when: systemd_active.stat.exists
       block:
+        - name: Folder for timer exists
+          ansible.builtin.file:
+            path: "{{ logrotate_systemd_timer_directory }}"
+            state: directory
+            mode: "0755"
+
         - name: Generate systemd timer scheduling
           ansible.builtin.template:
             src: logrotate.timer.j2
             dest: "{{ logrotate_systemd_timer_directory }}/logrotate.timer"
             mode: "0644"
+          notify: Reload systemd
 
-        # - name: Enable logrotate timer
-        #   ansible.builtin.systemd:
-        #     name: logrotate.timer
-        #     state: started
-        #     enabled: yes
-        #   when:
-        #     - logrotate_schedule_file is defined
-        #     - logrotate_schedule_file == "logrotate.timer"
+        - name: flushing handlers
+          ansible.builtin.meta: flush_handlers
+
+        - name: Enable logrotate timer
+          ansible.builtin.systemd:
+            name: logrotate.timer
+            daemon_reload: true
+            state: started
+            enabled: true
+          when:
+            - logrotate_schedule_file is defined
+            - logrotate_schedule_file == "logrotate.timer"
 
         - name: Remove cron scheduling
           ansible.builtin.file:
