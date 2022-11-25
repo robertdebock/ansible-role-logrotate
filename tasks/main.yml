@@ -35,6 +35,7 @@
       ansible.builtin.stat:
         path: /run/systemd/system
       register: systemd_active
+      check_mode: no
       when: logrotate_schedule_force_cron is not defined or not logrotate_schedule_force_cron
 
     - name: actions block when systemd is active
