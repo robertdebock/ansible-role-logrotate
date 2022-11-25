@@ -24,4 +24,5 @@ logrotate_set_scheduling: true
 logrotate_schedule_force_cron: false
 
 logrotate_systemd_timer_directory: /etc/systemd/system/timers.target.wants
+logrotate_cron_directory_base: /etc/cron
 logrotate_cron_filename: logrotate

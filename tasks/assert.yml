@@ -239,14 +239,14 @@
   when:
     - item.dateformat is defined
 
-- name: assert that variable logrotate_scheduling is daily or hourly
+- name: Assert that variable logrotate_scheduling is daily or hourly
   ansible.builtin.assert:
     that:
       - logrotate_scheduling in ["daily", "hourly"]
     fail_msg: "logrotate_scheduling must be daily or hourly"
     quiet: yes
 
-- name: assert that variable logrotate_set_scheduling is boolean
+- name: Assert that variable logrotate_set_scheduling is boolean
   ansible.builtin.assert:
     that:
       - logrotate_set_scheduling is boolean
