@@ -6,7 +6,7 @@
 
   vars:
     logrotate_frequency: daily
-    logrotate_schedule: hourly
+    logrotate_check_frequency: hourly
     logrotate_keep: 7
     logrotate_compress: yes
     logrotate_entries:

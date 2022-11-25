@@ -18,8 +18,8 @@ logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_u
 logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default'] ) }}"
 
 # Scheduling variables
-# logrotate_scheduling can be set to daily or hourly, it's the frequency of the cron job
-logrotate_scheduling: daily
+# logrotate_check_frequency can be set to daily or hourly, it's the frequency of the cron job
+logrotate_check_frequency: daily
 logrotate_set_scheduling: true
 logrotate_schedule_force_cron: false
 

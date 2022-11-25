@@ -68,7 +68,7 @@
 
         - name: Remove cron scheduling
           ansible.builtin.file:
-            path: "{{ logrotate_cron_directory_base }}.{{ logrotate_scheduling }}/logrotate"
+            path: "{{ logrotate_cron_directory_base }}.{{ logrotate_check_frequency }}/logrotate"
             state: absent
 
     - name: actions block when systemd is not active
@@ -77,10 +77,10 @@
         - name: Generate cron scheduling
           ansible.builtin.template:
             src: logrotate.cron.j2
-            dest: "{{ logrotate_cron_directory_base }}.{{ logrotate_scheduling }}/{{ logrotate_cron_filename }}"
+            dest: "{{ logrotate_cron_directory_base }}.{{ logrotate_check_frequency }}/{{ logrotate_cron_filename }}"
             mode: "0644"
 
         - name: Remove cron schedule for not used schedule (daily/weekly)
           ansible.builtin.file:
-            path: "{{ logrotate_cron_directory_base }}.{{ logrotate_scheduling == 'daily' | ternary('weekly', 'daily') }}/{{ logrotate_cron_filename }}"
+            path: "{{ logrotate_cron_directory_base }}.{{ (logrotate_check_frequency == 'hourly') | ternary('hourly', 'daily') }}/{{ logrotate_cron_filename }}"
             state: absent
