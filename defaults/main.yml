@@ -10,6 +10,9 @@ logrotate_keep: 4
 # Should rotated logs be compressed??
 logrotate_compress: yes
 
+# Extra parameter for logrotate.conf not covered by template
+logrotate_conf_extra_parameters: ""
+
 # Use date extension on log file names
 logrotate_dateext: no
 
