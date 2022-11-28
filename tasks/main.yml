@@ -38,7 +38,7 @@
       check_mode: no
       when: logrotate_schedule_force_cron is not defined or not logrotate_schedule_force_cron
 
-    - name: actions block when systemd is active
+    - name: Actions block when systemd is active
       when: (logrotate_schedule_force_cron is not defined or not logrotate_schedule_force_cron) and systemd_active.stat.exists
       block:
         - name: Folder for timer exists
@@ -54,7 +54,7 @@
             mode: "0644"
           notify: Reload systemd
 
-        - name: flushing handlers
+        - name: Flushing handlers
           ansible.builtin.meta: flush_handlers
 
         - name: Enable logrotate timer
@@ -72,7 +72,7 @@
             path: "{{ logrotate_cron_directory_base }}.{{ logrotate_check_frequency }}/logrotate"
             state: absent
 
-    - name: actions block when systemd is not active
+    - name: Actions block when systemd is not active
       when: (logrotate_schedule_force_cron is defined and logrotate_schedule_force_cron) or not systemd_active.stat.exists
       block:
         - name: Generate cron scheduling
