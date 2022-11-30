@@ -31,4 +31,8 @@ compress
 # packages drop log rotation information into this directory
 include /etc/logrotate.d
 
+{% if logrotate_conf_extra_parameters %}
+{{ logrotate_conf_extra_parameters }}
+{% endif %}
+
 # system-specific logs may be configured here
