@@ -154,8 +154,8 @@ logrotate_compress: yes
 logrotate_dateext: no
 
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
-logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default'] ) }}"
-logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default'] ) }}"
+logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"
+logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default']) }}"
 ```
 
 ## [Requirements](#requirements)
