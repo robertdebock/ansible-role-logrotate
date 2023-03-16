@@ -30,6 +30,8 @@
 
 {% if item.dateformat is defined and item.dateformat %}    dateformat {{ item.dateformat }}{% endif %}
 
+{% if item.dateyesterday is defined and item.dateyesterday %}    dateformat{% endif %}
+
 {% if item.postrotate is defined %}    postrotate
         {{ item.postrotate }}
     endscript{% endif %}
