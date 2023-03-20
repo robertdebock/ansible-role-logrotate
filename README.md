@@ -78,6 +78,9 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       - name: example-sharedscripts
         path: "/var/log/example-sharedscripts/*.log"
         sharedscripts: yes
+      - name: example-dateyesterday
+        path: "/var/log/example-dateyesterday/*.log"
+        dateyesterday: yes
 
   roles:
     - role: robertdebock.logrotate

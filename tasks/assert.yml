@@ -239,3 +239,14 @@
     label: "{{ item.name }}"
   when:
     - item.dateformat is defined
+
+- name: Test if dateyesterday in logrotate_entries is set correctly
+  ansible.builtin.assert:
+    that:
+      - item.dateyesterday is string
+    quiet: yes
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.dateyesterday is defined
