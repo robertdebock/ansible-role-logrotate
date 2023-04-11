@@ -243,7 +243,7 @@
 - name: Test if dateyesterday in logrotate_entries is set correctly
   ansible.builtin.assert:
     that:
-      - item.dateyesterday is string
+      - item.dateyesterday is boolean
     quiet: yes
   loop: "{{ logrotate_entries }}"
   loop_control:
