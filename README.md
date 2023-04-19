@@ -114,6 +114,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-delaycompress
         - /var/log/example-script
         - /var/log/example-sharedscripts
+        - /var/log/example-dateyesterday
 
     - name: create log file
       ansible.builtin.copy:
@@ -129,6 +130,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-delaycompress/app.log
         - /var/log/example-script/app.log
         - /var/log/example-sharedscripts/app.log
+        - /var/log/example-dateyesterday/app.log
         - /var/log/btmp
         - /var/log/wtmp
         - /var/log/hawkey.log
