@@ -5,6 +5,6 @@
   gather_facts: no
 
   tasks:
-    - name: run logrotate
+    - name: Run logrotate
       ansible.builtin.command:
         cmd: logrotate /etc/logrotate.conf
