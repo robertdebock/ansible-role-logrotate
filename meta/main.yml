@@ -32,5 +32,7 @@ galaxy_info:
 
   galaxy_tags:
     - logrotate
+    - monitoring
+    - system
 
 dependencies: []
