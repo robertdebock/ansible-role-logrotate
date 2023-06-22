@@ -1,6 +1,12 @@
 {{ ansible_managed | comment }}
 
+{% if item.path is iterable and item.path is not string and item.path is not mapping %}
+{% for path in item.path %}
+{{ path }}{{ " {" if loop.last }}
+{% endfor %}
+{% else %}
 {{ item.path }} {
+{% endif %}
 {% if item.frequency is defined %}
     {{ item.frequency }}
 {% endif %}
@@ -37,7 +43,13 @@
 {% endif %}
 {% if item.postrotate is defined %}
     postrotate
+{% if item.postrotate is iterable and item.postrotate is not string and item.postrotate is not mapping %}
+{% for cmd in item.postrotate %}
+        {{ cmd }}
+{% endfor %}
+{% else %}
         {{ item.postrotate }}
+{% endif %}
     endscript
 {% endif %}
 }
