@@ -85,7 +85,7 @@
 - name: assert | Test if keep in logrotate_entries is set correctly
   ansible.builtin.assert:
     that:
-      - item.keep is integer
+      - item.keep is number
       - item.keep >= 1
     quiet: yes
   loop: "{{ logrotate_entries }}"
