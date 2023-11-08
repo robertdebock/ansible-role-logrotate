@@ -2,9 +2,9 @@
 
 Install and configure logrotate on your system.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-logrotate/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-logrotate/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-logrotate/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-logrotate)|[![quality](https://img.shields.io/ansible/quality/39060)](https://galaxy.ansible.com/robertdebock/logrotate)|[![downloads](https://img.shields.io/ansible/role/d/39060)](https://galaxy.ansible.com/robertdebock/logrotate)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-logrotate.svg)](https://github.com/robertdebock/ansible-role-logrotate/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-logrotate/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-logrotate/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-logrotate/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-logrotate)|[![downloads](https://img.shields.io/ansible/role/d/24527)](https://galaxy.ansible.com/robertdebock/logrotate)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-logrotate.svg)](https://github.com/robertdebock/ansible-role-logrotate/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -203,7 +203,7 @@ The minimum version of Ansible required is 2.12, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-logrotate/issues)
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-logrotate/issues).
 
 ## [License](#license)
 
