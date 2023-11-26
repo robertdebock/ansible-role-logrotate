@@ -1,4 +1,4 @@
-# Ansible role [logrotate](#logrotate)
+# [Ansible role logrotate](#logrotate)
 
 Install and configure logrotate on your system.
 
