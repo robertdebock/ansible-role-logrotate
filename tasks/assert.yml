@@ -260,3 +260,17 @@
     label: "{{ item.name }}"
   when:
     - item.dateyesterday is defined
+
+- name: assert | Variable logrotate_check_frequency is daily or hourly
+  ansible.builtin.assert:
+    that:
+      - logrotate_check_frequency in ["daily", "hourly"]
+    fail_msg: "logrotate_check_frequency must be daily or hourly"
+    quiet: yes
+
+- name: assert | Variable logrotate_set_scheduling is boolean
+  ansible.builtin.assert:
+    that:
+      - logrotate_set_scheduling is boolean
+    fail_msg: "logrotate_set_scheduling must be boolean"
+    quiet: yes

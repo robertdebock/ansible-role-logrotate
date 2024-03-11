@@ -1,0 +1,11 @@
+[Unit]
+Description={{ logrotate_check_frequency | capitalize }} check of file rotate
+Documentation=man:logrotate(8) man:logrotate.conf(5)
+
+[Timer]
+OnCalendar={{ logrotate_check_frequency }}
+AccuracySec=1m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -21,6 +21,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     logrotate_frequency: daily
     logrotate_keep: 7
     logrotate_compress: yes
+    logrotate_check_frequency: hourly
+    logrotate_schedule_force_cron: true
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"

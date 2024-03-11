@@ -28,3 +28,61 @@
     - logrotate_entries is defined
   loop_control:
     label: "{{ item.name }}"
+
+- name: Generate cron or systemd timer scheduling
+  when: logrotate_set_scheduling
+  block:
+    - name: Check if systemd is active
+      ansible.builtin.stat:
+        path: /run/systemd/system
+      register: systemd_active
+      check_mode: no
+      when: logrotate_schedule_force_cron is not defined or not logrotate_schedule_force_cron
+
+    - name: Actions block when systemd is active
+      when: (logrotate_schedule_force_cron is not defined or not logrotate_schedule_force_cron) and systemd_active.stat.exists
+      block:
+        - name: Folder for timer exists
+          ansible.builtin.file:
+            path: "{{ logrotate_systemd_timer_directory }}"
+            state: directory
+            mode: "0755"
+
+        - name: Generate systemd timer scheduling
+          ansible.builtin.template:
+            src: logrotate.timer.j2
+            dest: "{{ logrotate_systemd_timer_directory }}/logrotate.timer"
+            mode: "0644"
+          notify: Reload systemd
+
+        - name: Flushing handlers
+          ansible.builtin.meta: flush_handlers
+
+        - name: Enable logrotate timer
+          ansible.builtin.systemd:
+            name: logrotate.timer
+            daemon_reload: true
+            state: started
+            enabled: true
+          when:
+            - logrotate_schedule_file is defined
+            - logrotate_schedule_file == "logrotate.timer"
+
+        - name: Remove cron scheduling
+          ansible.builtin.file:
+            path: "{{ logrotate_cron_directory_base }}.{{ logrotate_check_frequency }}/logrotate"
+            state: absent
+
+    - name: Actions block when systemd is not active
+      when: (logrotate_schedule_force_cron is defined and logrotate_schedule_force_cron) or not systemd_active.stat.exists
+      block:
+        - name: Generate cron scheduling
+          ansible.builtin.template:
+            src: logrotate.cron.j2
+            dest: "{{ logrotate_cron_directory_base }}.{{ logrotate_check_frequency }}/{{ logrotate_cron_filename }}"
+            mode: "0700"
+
+        - name: Remove cron schedule for not used schedule (daily/hourly)
+          ansible.builtin.file:
+            path: "{{ logrotate_cron_directory_base }}.{{ (logrotate_check_frequency == 'hourly') | ternary('daily', 'hourly') }}/{{ logrotate_cron_filename }}"
+            state: absent
