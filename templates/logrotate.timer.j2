@@ -1,10 +1,10 @@
 [Unit]
-Description={{ logrotate_schedule | capitalize }} rotation of log files
+Description={{ logrotate_check_frequency | capitalize }} check of file rotate
 Documentation=man:logrotate(8) man:logrotate.conf(5)
 
 [Timer]
-OnCalendar={{ logrotate_schedule }}
-AccuracySec=1h
+OnCalendar={{ logrotate_check_frequency }}
+AccuracySec=1m
 Persistent=true
 
 [Install]
