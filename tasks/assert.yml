@@ -6,7 +6,7 @@
       - logrotate_frequency is defined
       - logrotate_frequency is string
       - logrotate_frequency in [ "daily", "weekly", "monthly" ]
-    quiet: yes
+    quiet: true
 
 - name: assert | Test logrotate_keep
   ansible.builtin.assert:
@@ -14,21 +14,21 @@
       - logrotate_keep is defined
       - logrotate_keep is number
       - logrotate_keep >= 0
-    quiet: yes
+    quiet: true
 
 - name: assert | Test logrotate_compress
   ansible.builtin.assert:
     that:
       - logrotate_compress is defined
       - logrotate_compress is boolean
-    quiet: yes
+    quiet: true
 
 - name: assert | Test logrotate_dateext
   ansible.builtin.assert:
     that:
       - logrotate_dateext is defined
       - logrotate_dateext is boolean
-    quiet: yes
+    quiet: true
 
 - name: assert | Test logrotate_user
   ansible.builtin.assert:
@@ -36,7 +36,7 @@
       - logrotate_user is defined
       - logrotate_user is string
       - logrotate_user is not none
-    quiet: yes
+    quiet: true
 
 - name: assert | Test logrotate_group
   ansible.builtin.assert:
@@ -44,13 +44,13 @@
       - logrotate_group is defined
       - logrotate_group is string
       - logrotate_group is not none
-    quiet: yes
+    quiet: true
 
 - name: assert | Test logrotate_entries
   ansible.builtin.assert:
     that:
       - logrotate_entries is iterable
-    quiet: yes
+    quiet: true
   when:
     - logrotate_entries is defined
 
@@ -63,7 +63,7 @@
       - item.path is defined
       - item.path is string
       - item.path is not none
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -75,7 +75,7 @@
     that:
       - item.frequency is string
       - item.frequency in [ "daily", "weekly", "monthly" ]
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -87,7 +87,7 @@
     that:
       - item.keep is number
       - item.keep >= 1
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -98,7 +98,7 @@
   ansible.builtin.assert:
     that:
       - item.compress is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -109,7 +109,7 @@
   ansible.builtin.assert:
     that:
       - item.delaycompress is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -121,7 +121,7 @@
     that:
       - item.postrotate is string
       - item.postrotate is not none
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -132,7 +132,7 @@
   ansible.builtin.assert:
     that:
       - item.missingok is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -143,7 +143,7 @@
   ansible.builtin.assert:
     that:
       - item.nomissingok is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -162,7 +162,7 @@
       - item.create_group is defined
       - item.create_group is string
       - item.create_group is not none
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -176,7 +176,7 @@
     that:
       - item.minsize is string
       - item.minsize is not none
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -187,7 +187,7 @@
   ansible.builtin.assert:
     that:
       - item.notifempty is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -198,7 +198,7 @@
   ansible.builtin.assert:
     that:
       - item.copylog is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -209,7 +209,7 @@
   ansible.builtin.assert:
     that:
       - item.copytruncate is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -220,7 +220,7 @@
   ansible.builtin.assert:
     that:
       - item.sharedscripts is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -231,7 +231,7 @@
   ansible.builtin.assert:
     that:
       - item.dateext is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -243,7 +243,7 @@
     that:
       - item.dateformat is string
       - item.dateformat is not none
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
@@ -254,7 +254,7 @@
   ansible.builtin.assert:
     that:
       - item.dateyesterday is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"

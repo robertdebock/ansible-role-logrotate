@@ -8,10 +8,10 @@ logrotate_frequency: weekly
 logrotate_keep: 4
 
 # Should rotated logs be compressed??
-logrotate_compress: yes
+logrotate_compress: true
 
 # Use date extension on log file names
-logrotate_dateext: no
+logrotate_dateext: false
 
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
 logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"

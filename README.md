@@ -14,13 +14,13 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   vars:
     logrotate_frequency: daily
     logrotate_keep: 7
-    logrotate_compress: yes
+    logrotate_compress: true
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"
@@ -32,55 +32,55 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         keep: 14
       - name: example-compress
         path: "/var/log/example-compress/*.log"
-        compress: yes
+        compress: true
       - name: example-copylog
         path: "/var/log/example-copylog/*.log"
-        copylog: yes
+        copylog: true
       - name: example-copytruncate
         path: "/var/log/example-copytruncate/*.log"
-        copytruncate: yes
+        copytruncate: true
       - name: example-delaycompress
         path: "/var/log/example-delaycompress/*.log"
-        delaycompress: yes
+        delaycompress: true
       - name: example-script
         path: "/var/log/example-script/*.log"
         postrotate: killall -HUP some_process_name
       - name: btmp
         path: /var/log/btmp
-        missingok: yes
+        missingok: true
         frequency: monthly
-        create: yes
+        create: true
         create_mode: "0660"
         create_user: root
         create_group: utmp
-        dateext: yes
+        dateext: true
         dateformat: "-%Y-%m-%d"
         keep: 1
       - name: wtmp
         path: /var/log/wtmp
-        missingok: yes
+        missingok: true
         frequency: monthly
-        create: yes
+        create: true
         create_mode: "0664"
         create_user: root
         create_group: utmp
         minsize: 1M
-        dateext: yes
+        dateext: true
         dateformat: "-%Y%m%d"
         keep: 1
       - name: dnf
         path: /var/log/hawkey.log
-        missingok: yes
-        notifempty: yes
+        missingok: true
+        notifempty: true
         keep: 4
         frequency: weekly
-        create: yes
+        create: true
       - name: example-sharedscripts
         path: "/var/log/example-sharedscripts/*.log"
-        sharedscripts: yes
+        sharedscripts: true
       - name: example-dateyesterday
         path: "/var/log/example-dateyesterday/*.log"
-        dateyesterday: yes
+        dateyesterday: true
 
   roles:
     - role: robertdebock.logrotate
@@ -92,8 +92,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: robertdebock.bootstrap
@@ -153,10 +153,10 @@ logrotate_frequency: weekly
 logrotate_keep: 4
 
 # Should rotated logs be compressed??
-logrotate_compress: yes
+logrotate_compress: true
 
 # Use date extension on log file names
-logrotate_dateext: no
+logrotate_dateext: false
 
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
 logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"
