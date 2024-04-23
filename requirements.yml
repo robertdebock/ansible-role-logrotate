@@ -2,4 +2,3 @@
 roles:
   - name: robertdebock.bootstrap
   - name: robertdebock.cron
-collections:
