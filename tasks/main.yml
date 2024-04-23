@@ -28,3 +28,11 @@
     - logrotate_entries is defined
   loop_control:
     label: "{{ item.name }}"
+
+- name: Start logrotate
+  ansible.builtin.service:
+    name: "{{ logrotate_service }}"
+    state: started
+    enabled: true
+  when:
+    - logrotate_service != ""

@@ -16,3 +16,10 @@ _logrotate_user:
 _logrotate_group:
   default: root
   Debian: adm
+
+_logrotate_service:
+  default: logrotate
+  Alpine: ""  # Alpine uses cron.
+  Suse: ""  # Suse uses cron.
+
+logrotate_service: "{{ _logrotate_service[ansible_os_family] | default(_logrotate_service['default']) }}"
