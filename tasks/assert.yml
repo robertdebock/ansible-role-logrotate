@@ -69,6 +69,19 @@
     label: "{{ item.name }}"
   when:
     - logrotate_entries is defined
+    - item.state is not defined or item.state != "absent"
+
+- name: assert | Test state in logrotate_entries
+  ansible.builtin.assert:
+    that:
+      - item.state is string
+      - item.state in [ "present", "absent" ]
+    quiet: true
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.state is defined
 
 - name: assert | Test frequency in logrotate_entries
   ansible.builtin.assert:

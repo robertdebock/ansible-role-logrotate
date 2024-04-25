@@ -66,8 +66,11 @@
         path: "/var/log/example-sharedscripts/*.log"
         sharedscripts: true
       - name: example-dateyesterday
+        state: present
         path: "/var/log/example-dateyesterday/*.log"
         dateyesterday: true
+      - name: example-absent
+        state: absent
 
   roles:
     - role: ansible-role-logrotate

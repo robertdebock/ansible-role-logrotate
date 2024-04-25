@@ -26,6 +26,19 @@
   loop: "{{ logrotate_entries }}"
   when:
     - logrotate_entries is defined
+    - item.state is not defined or item.state != "absent"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Remove logrotate.d files
+  ansible.builtin.file:
+    path: "{{ logrotate_confd_directory }}/{{ item.name }}"
+    state: absent
+  loop: "{{ logrotate_entries }}"
+  when:
+    - logrotate_entries is defined
+    - item.state is defined
+    - item.state == "absent"
   loop_control:
     label: "{{ item.name }}"
 

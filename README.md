@@ -81,6 +81,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       - name: example-dateyesterday
         path: "/var/log/example-dateyesterday/*.log"
         dateyesterday: true
+      - name: example-absent
+        state: absent
 
   roles:
     - role: robertdebock.logrotate
