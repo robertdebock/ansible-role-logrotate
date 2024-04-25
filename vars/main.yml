@@ -18,7 +18,7 @@ _logrotate_group:
   Debian: adm
 
 _logrotate_service:
-  default: logrotate
+  default: logrotate.timer
   Alpine: ""  # Alpine uses cron.
   Suse: ""  # Suse uses cron.
 
