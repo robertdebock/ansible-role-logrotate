@@ -27,7 +27,7 @@ molecule:
       - image: "debian"
         tag: "bullseye"
       - image: "fedora"
-        tag: "38"
+        tag: "39"
       - image: "fedora"
         tag: "latest"
       - image: "fedora"
