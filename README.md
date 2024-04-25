@@ -79,6 +79,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         path: "/var/log/example-sharedscripts/*.log"
         sharedscripts: true
       - name: example-dateyesterday
+        state: present
         path: "/var/log/example-dateyesterday/*.log"
         dateyesterday: true
       - name: example-absent

@@ -37,9 +37,9 @@ molecule:
       - image: "ubuntu"
         tag: "latest"
       - image: "ubuntu"
-        tag: "focal"
+        tag: "jammy"
       - image: "ubuntu"
-        tag: "bionic"
+        tag: "focal"
 
 galaxy:
   script:
