@@ -12,8 +12,6 @@
   ansible.builtin.assert:
     that:
       - logrotate_keep is defined
-      - logrotate_keep is number
-      - logrotate_keep >= -1
     quiet: true
 
 - name: assert | Test logrotate_compress
@@ -99,13 +97,13 @@
   ansible.builtin.assert:
     that:
       - item.keep is number
-      - item.keep >= 1
     quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
     label: "{{ item.name }}"
   when:
     - item.keep is defined
+    - item.keep is number
 
 - name: assert | Test compress in logrotate_entries
   ansible.builtin.assert:
