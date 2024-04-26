@@ -184,6 +184,18 @@
       item.create_user is defined or
       item.create_group is defined
 
+- name: assert | Test maxsize in logrotate_entries
+  ansible.builtin.assert:
+    that:
+      - item.maxsize is string
+      - item.maxsize is not none
+    quiet: true
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.maxsize is defined
+
 - name: assert | Test minsize in logrotate_entries
   ansible.builtin.assert:
     that:

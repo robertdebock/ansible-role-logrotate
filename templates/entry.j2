@@ -10,6 +10,8 @@
 
 {% if item.keep is defined %}    rotate {{ item.keep }}{% endif %}
 
+{% if item.maxsize is defined %}    maxsize {{ item.maxsize }}{% endif %}
+
 {% if item.minsize is defined %}    minsize {{ item.minsize }}{% endif %}
 
 {% if item.missingok is defined and item.missingok %}    missingok{% endif %}

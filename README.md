@@ -65,6 +65,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         create_user: root
         create_group: utmp
         minsize: 1M
+        maxsize: 128M
         dateext: true
         dateformat: "-%Y%m%d"
         keep: 1
