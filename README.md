@@ -85,9 +85,10 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         dateyesterday: true
       - name: example-absent
         state: absent
-      - name: example-negative
-        path: "/var/log/example-keep-negative/*.log"
-        keep: -1
+      # Negative numbers work on some distributions: `error: example-negative:10 bad rotation count '-1'\`
+      # - name: example-negative
+      #   path: "/var/log/example-keep-negative/*.log"
+      #   keep: -1
 
   roles:
     - role: robertdebock.logrotate
@@ -123,7 +124,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-script
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
-        - /var/log/example-keep-negative
 
     - name: Create log file
       ansible.builtin.copy:
@@ -141,7 +141,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-script/app.log
         - /var/log/example-sharedscripts/app.log
         - /var/log/example-dateyesterday/app.log
-        - /var/log/example-keep-negative/app.log
         - /var/log/btmp
         - /var/log/wtmp
         - /var/log/hawkey.log

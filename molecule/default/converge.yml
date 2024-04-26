@@ -72,9 +72,10 @@
         dateyesterday: true
       - name: example-absent
         state: absent
-      - name: example-negative
-        path: "/var/log/example-keep-negative/*.log"
-        keep: -1
+      # Negative numbers work on some distributions: `error: example-negative:10 bad rotation count '-1'\`
+      # - name: example-negative
+      #   path: "/var/log/example-keep-negative/*.log"
+      #   keep: -1
 
   roles:
     - role: ansible-role-logrotate
