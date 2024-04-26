@@ -13,7 +13,7 @@
     that:
       - logrotate_keep is defined
       - logrotate_keep is number
-      - logrotate_keep >= 0
+      - logrotate_keep >= -1
     quiet: true
 
 - name: assert | Test logrotate_compress

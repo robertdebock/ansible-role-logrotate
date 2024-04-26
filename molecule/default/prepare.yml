@@ -24,6 +24,7 @@
         - /var/log/example-script
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
+        - /var/log/example-keep-negative
 
     - name: Create log file
       ansible.builtin.copy:

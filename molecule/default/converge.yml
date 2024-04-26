@@ -71,6 +71,9 @@
         dateyesterday: true
       - name: example-absent
         state: absent
+      - name: example-negative
+        path: "/var/log/example-keep-negative/*.log"
+        keep: -1
 
   roles:
     - role: ansible-role-logrotate

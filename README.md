@@ -84,6 +84,9 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         dateyesterday: true
       - name: example-absent
         state: absent
+      - name: example-negative
+        path: "/var/log/example-keep-negative/*.log"
+        keep: -1
 
   roles:
     - role: robertdebock.logrotate
@@ -118,6 +121,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-script
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
+        - /var/log/example-keep-negative
 
     - name: Create log file
       ansible.builtin.copy:
