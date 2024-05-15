@@ -283,3 +283,18 @@
     label: "{{ item.name }}"
   when:
     - item.dateyesterday is defined
+
+- name: assert | Test logrotate_service_state
+  ansible.builtin.assert:
+    that:
+      - logrotate_service_state is defined
+      - logrotate_service_state is string
+      - logrotate_service_state in [ "started", "stopped" ]
+    quiet: true
+
+- name: assert | Test logrotate_service_enabled
+  ansible.builtin.assert:
+    that:
+      - logrotate_service_enabled is defined
+      - logrotate_service_enabled is boolean
+    quiet: true

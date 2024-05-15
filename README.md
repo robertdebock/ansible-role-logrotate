@@ -171,6 +171,10 @@ logrotate_dateext: false
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
 logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"
 logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default']) }}"
+
+# Set the state of the service
+logrotate_service_state: "started"
+logrotate_service_enabled: true
 ```
 
 ## [Requirements](#requirements)

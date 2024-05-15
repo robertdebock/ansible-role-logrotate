@@ -18,5 +18,5 @@ logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_u
 logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default']) }}"
 
 # Set the state of the service
-logrotate_servicestate: "started"
-logrotate_serviceenabled: "true"
+logrotate_service_state: "started"
+logrotate_service_enabled: true
