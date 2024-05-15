@@ -25,6 +25,4 @@ _logrotate_service:
     default: ""
     "7": ""
     "8": ""
-
-# logrotate_service: "{{ _logrotate_service[ansible_os_family] | default(_logrotate_service['default']) }}"
 logrotate_service: "{{ _logrotate_service[ansible_os_family][ansible_distribution_major_version] | default(_logrotate_service[ansible_os_family]['default']) | default(_logrotate_service[ansible_os_family]) | default(_logrotate_service['default']) }}"
