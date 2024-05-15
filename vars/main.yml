@@ -19,7 +19,7 @@ _logrotate_group:
 
 _logrotate_service:
   default: logrotate.timer
-  Alpine: 
+  Alpine:
     default: ""  # Alpine uses cron.
   Suse: ""  # Suse uses cron.
   RedHat:
