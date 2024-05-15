@@ -47,3 +47,5 @@
     name: "{{ logrotate_service }}"
     state: "{{ logrotate_service_state }}"
     enabled: "{{ logrotate_service_enabled }}"
+  when:
+    - logrotate_service != ""
