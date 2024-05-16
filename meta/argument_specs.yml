@@ -1,0 +1,41 @@
+---
+
+argument_specs:
+  main:
+    short_description: "Install and configure logrotate on your system."
+    description: >
+      Install and configure logrotate on your system.
+    author: Robert de Bock
+    options:
+      logrotate_frequency:
+        type: str
+        description: "How often to rotate logs, either daily, weekly or monthly."
+        default: "weekly"
+      logrotate_keep:
+        type: int
+        description: "How many files to keep."
+        default: 4
+      logrotate_compress:
+        type: bool
+        description: "Should rotated logs be compressed??"
+        default: true
+      logrotate_dateext:
+        type: bool
+        description: "Use date extension on log file names"
+        default: false
+      logrotate_user:
+        type: str
+        description: "User for rotated log files. Automatically determined, but overridable."
+        default: "root"
+      logrotate_group:
+        type: str
+        description: "Group for rotated log files. Automatically determined, but overridable."
+        default: "root"
+      logrotate_service_state:
+        type: str
+        description: "Set the state of the service."
+        default: "started"
+      logrotate_service_enabled:
+        type: bool
+        description: "Set the enabled state the service."
+        default: true
