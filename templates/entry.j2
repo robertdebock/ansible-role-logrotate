@@ -34,6 +34,10 @@
 
 {% if item.dateyesterday is defined and item.dateyesterday %}    dateyesterday{% endif %}
 
+{% if item.prerotate is defined %}    prerotate
+        {{ item.prerotate }}
+    endscript{% endif %}
+
 {% if item.postrotate is defined %}    postrotate
         {{ item.postrotate }}
     endscript{% endif %}

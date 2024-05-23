@@ -42,8 +42,11 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       - name: example-delaycompress
         path: "/var/log/example-delaycompress/*.log"
         delaycompress: true
-      - name: example-script
-        path: "/var/log/example-script/*.log"
+      - name: example-prerotate-script
+        path: "/var/log/example-prerotate-script/*.log"
+        prerotate: echo "e.g. backup to an offsite location"
+      - name: example-postrotate-script
+        path: "/var/log/example-postrotate-script/*.log"
         postrotate: killall -HUP some_process_name
       - name: btmp
         path: /var/log/btmp
