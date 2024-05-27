@@ -1,7 +1,12 @@
 {{ ansible_managed | comment }}
 
+{% if item.path is iterable and item.path is not string and item.path is not mapping %}
+{% for path in item.path %}
+{{ path }}{{ " {" if loop.last }}
+{% endfor %}
+{% else %}
 {{ item.path }} {
-
+{% endif %}
 {% if item.frequency is defined %}    {{ item.frequency }}{% endif %}
 
 {% if item.compress is defined and item.compress %}    compress{% endif %}

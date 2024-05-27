@@ -59,7 +59,10 @@
       - item.name is string
       - item.name is not none
       - item.path is defined
-      - item.path is string
+      - item.path is string or
+        (item.path is iterable and
+        item.path is not string and
+        item.path is not mapping)
       - item.path is not none
     quiet: true
   loop: "{{ logrotate_entries }}"
