@@ -45,6 +45,10 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       - name: example-script
         path: "/var/log/example-script/*.log"
         postrotate: killall -HUP some_process_name
+      - name: example-multipath
+        path:
+          - "/var/log/example-multipath-one/*.log"
+          - "/var/log/example-multipath-two/*.log"
       - name: btmp
         path: /var/log/btmp
         missingok: true
