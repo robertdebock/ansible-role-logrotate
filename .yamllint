@@ -9,7 +9,8 @@ rules:
     max-spaces-inside: 1
     level: error
   line-length: disable
-  truthy: disable
+  truthy:
+    check-keys: false
 
 ignore: |
   .tox/

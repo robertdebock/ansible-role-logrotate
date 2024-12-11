@@ -4,7 +4,7 @@
 - name: Import assert.yml
   ansible.builtin.import_tasks:
     file: assert.yml
-  run_once: yes
+  run_once: true
   delegate_to: localhost
 
 - name: Install logrotate
@@ -26,5 +26,26 @@
   loop: "{{ logrotate_entries }}"
   when:
     - logrotate_entries is defined
+    - item.state is not defined or item.state != "absent"
   loop_control:
     label: "{{ item.name }}"
+
+- name: Remove logrotate.d files
+  ansible.builtin.file:
+    path: "{{ logrotate_confd_directory }}/{{ item.name }}"
+    state: absent
+  loop: "{{ logrotate_entries }}"
+  when:
+    - logrotate_entries is defined
+    - item.state is defined
+    - item.state == "absent"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Start logrotate
+  ansible.builtin.service:
+    name: "{{ logrotate_service }}"
+    state: "{{ logrotate_service_state }}"
+    enabled: "{{ logrotate_service_enabled }}"
+  when:
+    - logrotate_service != ""

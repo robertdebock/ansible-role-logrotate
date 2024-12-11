@@ -1,46 +1,57 @@
 ---
-image: "robertdebock/github-action-molecule:6.0.0"
 
 variables:
-  PY_COLORS: 1
+  DEBIAN_FRONTEND: noninteractive
 
 molecule:
+  image: $python
   script:
+    - apt-get update -qq
+    - apt-get -y -qq install yamllint docker.io
+    - pip install --no-cache-dir tox
     - if [ -f tox.ini ] ; then tox ; fi
-    - if [ ! -f tox.ini ] ; then molecule test ; fi
+    - if [ ! -f tox.ini ] ; then pip install -r requirements.yml ; pip install ansible-lint ansible-core ; molecule test ; fi
   rules:
     - if: $CI_COMMIT_REF_NAME == "master"
   parallel:
     matrix:
       - image: "alpine"
         tag: "latest"
+        python: ['python:3.9', 'python:3.10']
       - image: "amazonlinux"
         tag: "latest"
-      - image: "enterpriselinux"
-        tag: "7"
-      - image: "enterpriselinux"
-        tag: "8"
+        python: ['python:3.9', 'python:3.10']
       - image: "enterpriselinux"
         tag: "latest"
+        python: ['python:3.9', 'python:3.10']
       - image: "debian"
         tag: "latest"
+        python: ['python:3.9', 'python:3.10']
       - image: "debian"
         tag: "bullseye"
+        python: ['python:3.9', 'python:3.10']
       - image: "fedora"
-        tag: "37"
+        tag: "39"
+        python: ['python:3.9', 'python:3.10']
       - image: "fedora"
         tag: "latest"
-      - image: "opensuse"
-        tag: "latest"
+        python: ['python:3.9', 'python:3.10']
+      - image: "fedora"
+        tag: "rawhide"
+        python: ['python:3.9', 'python:3.10']
       - image: "ubuntu"
         tag: "latest"
+        python: ['python:3.9', 'python:3.10']
+      - image: "ubuntu"
+        tag: "jammy"
+        python: ['python:3.9', 'python:3.10']
       - image: "ubuntu"
         tag: "focal"
-      - image: "ubuntu"
-        tag: "bionic"
+        python: ['python:3.9', 'python:3.10']
 
 galaxy:
   script:
+    - apk add ansible-core
     - ansible-galaxy role import --api-key ${GALAXY_API_KEY} robertdebock ${CI_PROJECT_NAME}
   rules:
     - if: $CI_COMMIT_TAG != null

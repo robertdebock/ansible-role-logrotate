@@ -1,10 +1,10 @@
-# [logrotate](#logrotate)
+# [Ansible role logrotate](#logrotate)
 
 Install and configure logrotate on your system.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-logrotate/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-logrotate/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-logrotate/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-logrotate)|[![quality](https://img.shields.io/ansible/quality/39060)](https://galaxy.ansible.com/robertdebock/logrotate)|[![downloads](https://img.shields.io/ansible/role/d/39060)](https://galaxy.ansible.com/robertdebock/logrotate)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-logrotate.svg)](https://github.com/robertdebock/ansible-role-logrotate/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-logrotate/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-logrotate/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-logrotate/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-logrotate)|[![downloads](https://img.shields.io/ansible/role/d/robertdebock/logrotate)](https://galaxy.ansible.com/robertdebock/logrotate)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-logrotate.svg)](https://github.com/robertdebock/ansible-role-logrotate/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -14,13 +14,13 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   vars:
     logrotate_frequency: daily
     logrotate_keep: 7
-    logrotate_compress: yes
+    logrotate_compress: true
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"
@@ -32,55 +32,63 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         keep: 14
       - name: example-compress
         path: "/var/log/example-compress/*.log"
-        compress: yes
+        compress: true
       - name: example-copylog
         path: "/var/log/example-copylog/*.log"
-        copylog: yes
+        copylog: true
       - name: example-copytruncate
         path: "/var/log/example-copytruncate/*.log"
-        copytruncate: yes
+        copytruncate: true
       - name: example-delaycompress
         path: "/var/log/example-delaycompress/*.log"
-        delaycompress: yes
+        delaycompress: true
       - name: example-script
         path: "/var/log/example-script/*.log"
         postrotate: killall -HUP some_process_name
       - name: btmp
         path: /var/log/btmp
-        missingok: yes
+        missingok: true
         frequency: monthly
-        create: yes
+        create: true
         create_mode: "0660"
         create_user: root
         create_group: utmp
-        dateext: yes
+        dateext: true
         dateformat: "-%Y-%m-%d"
         keep: 1
       - name: wtmp
         path: /var/log/wtmp
-        missingok: yes
+        missingok: true
         frequency: monthly
-        create: yes
+        create: true
         create_mode: "0664"
         create_user: root
         create_group: utmp
         minsize: 1M
-        dateext: yes
+        maxsize: 128M
+        dateext: true
         dateformat: "-%Y%m%d"
         keep: 1
       - name: dnf
         path: /var/log/hawkey.log
-        missingok: yes
-        notifempty: yes
+        missingok: true
+        notifempty: true
         keep: 4
         frequency: weekly
-        create: yes
+        create: true
       - name: example-sharedscripts
         path: "/var/log/example-sharedscripts/*.log"
-        sharedscripts: yes
+        sharedscripts: true
       - name: example-dateyesterday
+        state: present
         path: "/var/log/example-dateyesterday/*.log"
-        dateyesterday: yes
+        dateyesterday: true
+      - name: example-absent
+        state: absent
+      # Negative numbers work on some distributions: `error: example-negative:10 bad rotation count '-1'\`
+      # - name: example-negative
+      #   path: "/var/log/example-keep-negative/*.log"
+      #   keep: -1
 
   roles:
     - role: robertdebock.logrotate
@@ -92,8 +100,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: robertdebock.bootstrap
@@ -104,6 +112,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
+        mode: "0755"
       loop:
         - /var/log/example
         - /var/log/example-frequency
@@ -120,6 +129,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
       ansible.builtin.copy:
         dest: "{{ item }}"
         content: "example"
+        mode: "0644"
       loop:
         - /var/log/example/app.log
         - /var/log/example-frequency/app.log
@@ -153,14 +163,18 @@ logrotate_frequency: weekly
 logrotate_keep: 4
 
 # Should rotated logs be compressed??
-logrotate_compress: yes
+logrotate_compress: true
 
 # Use date extension on log file names
-logrotate_dateext: no
+logrotate_dateext: false
 
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
 logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"
 logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default']) }}"
+
+# Set the state of the service
+logrotate_service_state: "started"
+logrotate_service_enabled: true
 ```
 
 ## [Requirements](#requirements)
@@ -189,13 +203,12 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 
 |container|tags|
 |---------|----|
-|[Alpine](https://hub.docker.com/repository/docker/robertdebock/alpine/general)|all|
-|[Amazon](https://hub.docker.com/repository/docker/robertdebock/amazonlinux/general)|Candidate|
-|[EL](https://hub.docker.com/repository/docker/robertdebock/enterpriselinux/general)|all|
-|[Debian](https://hub.docker.com/repository/docker/robertdebock/debian/general)|all|
-|[Fedora](https://hub.docker.com/repository/docker/robertdebock/fedora/general)|all|
-|[opensuse](https://hub.docker.com/repository/docker/robertdebock/opensuse/general)|all|
-|[Ubuntu](https://hub.docker.com/repository/docker/robertdebock/ubuntu/general)|all|
+|[Alpine](https://hub.docker.com/r/robertdebock/alpine)|all|
+|[Amazon](https://hub.docker.com/r/robertdebock/amazonlinux)|Candidate|
+|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
+|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
+|[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
+|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done to:
 
@@ -203,7 +216,7 @@ The minimum version of Ansible required is 2.12, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-logrotate/issues)
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-logrotate/issues).
 
 ## [License](#license)
 
