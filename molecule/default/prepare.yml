@@ -22,7 +22,8 @@
         - /var/log/example-copylog
         - /var/log/example-copytruncate
         - /var/log/example-delaycompress
-        - /var/log/example-script
+        - /var/log/example-prerotate-script
+        - /var/log/example-postrotate-script
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
 
@@ -39,7 +40,8 @@
         - /var/log/example-copylog/app.log
         - /var/log/example-copytruncate/app.log
         - /var/log/example-delaycompress/app.log
-        - /var/log/example-script/app.log
+        - /var/log/example-prerotate-script/app.log
+        - /var/log/example-postrotate-script/app.log
         - /var/log/example-sharedscripts/app.log
         - /var/log/example-dateyesterday/app.log
         - /var/log/btmp
