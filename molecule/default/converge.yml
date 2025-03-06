@@ -78,4 +78,4 @@
       #   keep: -1
 
   roles:
-    - role: ansible-role-logrotate
+    - role: robertdebock.logrotate

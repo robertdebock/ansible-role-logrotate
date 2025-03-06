@@ -91,7 +91,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       #   keep: -1
 
   roles:
-    - role: ansible-role-logrotate
+    - role: robertdebock.logrotate
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-logrotate/blob/master/molecule/default/prepare.yml):
