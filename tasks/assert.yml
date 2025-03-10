@@ -127,6 +127,18 @@
   when:
     - item.delaycompress is defined
 
+- name: assert | Test prerotate in logrotate_entries
+  ansible.builtin.assert:
+    that:
+      - item.prerotate is string
+      - item.prerotate is not none
+    quiet: true
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.prerotate is defined
+
 - name: assert | Test postrotate in logrotate_entries
   ansible.builtin.assert:
     that:
