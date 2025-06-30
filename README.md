@@ -69,6 +69,11 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         dateext: true
         dateformat: "-%Y%m%d"
         keep: 1
+      - name: change user group when executing
+        path: /var/log/web-service/access.log
+        su: www-data www-data
+        keep: 4
+        frequency: weekly
       - name: dnf
         path: /var/log/hawkey.log
         missingok: true
