@@ -4,7 +4,8 @@
 
 {% if item.frequency is defined %}    {{ item.frequency }}{% endif %}
 
-{% if item.compress is defined and item.compress %}    compress{% endif %}
+{% if item.compress is defined and item.compress %}    compress
+{% elif item.compress is defined and not item.compress %}    nocompress{% endif %}
 
 {% if item.delaycompress is defined and item.delaycompress %}    delaycompress{% endif %}
 
