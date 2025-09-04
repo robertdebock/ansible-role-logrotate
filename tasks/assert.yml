@@ -292,6 +292,13 @@
       - logrotate_service_state in [ "started", "stopped" ]
     quiet: true
 
+- name: assert | Test logrotate_su
+  ansible.builtin.assert:
+    that:
+      - logrotate_su is defined
+      - logrotate_su is string
+    quiet: true
+
 - name: assert | Test logrotate_service_enabled
   ansible.builtin.assert:
     that:
