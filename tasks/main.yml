@@ -49,3 +49,21 @@
     enabled: "{{ logrotate_service_enabled }}"
   when:
     - logrotate_service != ""
+
+- name: Enable hourly logrotate
+  community.general.ini_file:
+    dest: "/etc/systemd/system/{{ logrotate_service }}.d/override.conf"
+    section: Timer
+    option: OnCalendar
+    value: "hourly"
+  when:
+    - logrotate_service != ""
+    - logrotate_frequency == "hourly"
+
+- name: Disable hourly logrotate
+  ansible.builtin.file:
+    path: "/etc/systemd/system/{{ logrotate_service }}.d/override.conf"
+    state: absent
+  when:
+    - logrotate_service != ""
+    - logrotate_frequency != "hourly"
