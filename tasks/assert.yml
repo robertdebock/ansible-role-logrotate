@@ -5,7 +5,7 @@
     that:
       - logrotate_frequency is defined
       - logrotate_frequency is string
-      - logrotate_frequency in [ "daily", "weekly", "monthly" ]
+      - logrotate_frequency in [ "hourly", "daily", "weekly", "monthly" ]
     quiet: true
 
 - name: assert | Test logrotate_keep
@@ -85,7 +85,7 @@
   ansible.builtin.assert:
     that:
       - item.frequency is string
-      - item.frequency in [ "daily", "weekly", "monthly" ]
+      - item.frequency in [ "hourly", "daily", "weekly", "monthly" ]
     quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
