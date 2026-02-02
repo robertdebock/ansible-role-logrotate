@@ -56,6 +56,9 @@
     section: Timer
     option: OnCalendar
     value: "hourly"
+    mode: "0644"
+    owner: root
+    group: root
   when:
     - logrotate_service != ""
     - logrotate_frequency == "hourly"

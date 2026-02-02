@@ -51,23 +51,7 @@ argument_specs:
       logrotate_entries:
         type: list
         elements: dict
-        description: "List of logrotate.d entries. Each entry must have either path (single path) or paths (list of paths), mutually exclusive."
-        suboptions:
-          name:
-            type: str
-            description: "Name of the config file in logrotate.d."
-          path:
-            type: str
-            description: "Single log path. Mutually exclusive with paths."
-          paths:
-            type: list
-            elements: str
-            description: "Multiple log paths for one block. Mutually exclusive with path."
-          prerotate:
-            description: >
-              Commands to run before rotation. Single command (string) or list of
-              commands (list of strings); mutually exclusive type per entry.
-          postrotate:
-            description: >
-              Commands to run after rotation. Single command (string) or list of
-              commands (list of strings); mutually exclusive type per entry.
+        description: >
+          List of logrotate.d entries. Each entry must have either path (single path)
+          or paths (list of paths), mutually exclusive. Keys include name, path,
+          paths, prerotate, postrotate.
