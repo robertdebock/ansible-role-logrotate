@@ -1,6 +1,6 @@
 {{ ansible_managed | comment }}
 
-{{ item.path }} {
+{% if item.paths is defined %}{{ item.paths | join(' ') }} {% else %}{{ item.path }} {% endif %}{
 
 {% if item.frequency is defined %}    {{ item.frequency }}
 {% endif -%}{% if item.compress is defined and item.compress %}    compress

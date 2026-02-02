@@ -48,3 +48,18 @@ argument_specs:
         type: bool
         description: "Set the enabled state the service."
         default: true
+      logrotate_entries:
+        type: list
+        elements: dict
+        description: "List of logrotate.d entries. Each entry must have either path (single path) or paths (list of paths), mutually exclusive."
+        suboptions:
+          name:
+            type: str
+            description: "Name of the config file in logrotate.d."
+          path:
+            type: str
+            description: "Single log path. Mutually exclusive with paths."
+          paths:
+            type: list
+            elements: str
+            description: "Multiple log paths for one block. Mutually exclusive with path."

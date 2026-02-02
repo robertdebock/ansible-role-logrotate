@@ -20,3 +20,17 @@
           - logrotate_prerotate_marker.stat.exists
           - logrotate_prerotate_marker.stat.isreg
         quiet: true
+
+    - name: Read example-paths logrotate config
+      ansible.builtin.slurp:
+        src: /etc/logrotate.d/example-paths
+      register: example_paths_config
+
+    - name: Assert example-paths config contains both paths and shared block
+      ansible.builtin.assert:
+        that:
+          - (example_paths_config.content | b64decode) is search("/var/log/example-paths/a.log")
+          - (example_paths_config.content | b64decode) is search("/var/log/example-paths/b.log")
+          - (example_paths_config.content | b64decode) is search("weekly")
+          - (example_paths_config.content | b64decode) is search("rotate 4")
+        quiet: true

@@ -79,6 +79,12 @@
       - name: example-prerotate
         path: "/var/log/example-prerotate/*.log"
         prerotate: touch /tmp/logrotate-prerotate
+      - name: example-paths
+        paths:
+          - "/var/log/example-paths/a.log"
+          - "/var/log/example-paths/b.log"
+        frequency: weekly
+        keep: 4
       - name: example-absent
         state: absent
         # Negative numbers work on some distributions: `error: example-negative:10 bad rotation count '-1'\`

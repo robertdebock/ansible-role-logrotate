@@ -65,9 +65,12 @@
       - item.name is defined
       - item.name is string
       - item.name is not none
-      - item.path is defined
-      - item.path is string
-      - item.path is not none
+      - >
+        (item.path is defined and item.path is string and item.path is not none
+         and item.paths is not defined)
+        or
+        (item.paths is defined and item.paths is iterable and item.paths is not string
+         and item.paths is not mapping and item.path is not defined)
     quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
@@ -75,6 +78,20 @@
   when:
     - logrotate_entries is defined
     - item.state is not defined or item.state != "absent"
+
+- name: assert | Test paths in logrotate_entries (each path is string)
+  ansible.builtin.assert:
+    that:
+      - (item.paths | reject("string") | list | length) == 0
+      - (item.paths | select("none") | list | length) == 0
+    quiet: true
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - logrotate_entries is defined
+    - item.state is not defined or item.state != "absent"
+    - item.paths is defined
 
 - name: assert | Test state in logrotate_entries
   ansible.builtin.assert:
