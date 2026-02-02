@@ -9,7 +9,7 @@ argument_specs:
     options:
       logrotate_frequency:
         type: str
-        description: "How often to rotate logs, either daily, weekly or monthly."
+        description: "How often to rotate logs, either hourly, daily, weekly or monthly."
         default: "weekly"
       logrotate_keep:
         type: int

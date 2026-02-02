@@ -168,7 +168,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 ---
 # defaults file for logrotate
 
-# How often to rotate logs, either daily, weekly or monthly.
+# How often to rotate logs, either hourly, daily, weekly or monthly.
 logrotate_frequency: weekly
 
 # How many files to keep.
