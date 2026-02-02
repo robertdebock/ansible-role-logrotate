@@ -21,6 +21,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
     logrotate_frequency: daily
     logrotate_keep: 7
     logrotate_compress: true
+    logrotate_create: false
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"
@@ -179,6 +180,9 @@ logrotate_compress: true
 
 # Use date extension on log file names
 logrotate_dateext: false
+
+# Enable the global `create` directive in /etc/logrotate.conf.
+logrotate_create: true
 
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
 logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"

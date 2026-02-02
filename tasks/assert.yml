@@ -28,6 +28,13 @@
       - logrotate_dateext is boolean
     quiet: true
 
+- name: assert | Test logrotate_create
+  ansible.builtin.assert:
+    that:
+      - logrotate_create is defined
+      - logrotate_create is boolean
+    quiet: true
+
 - name: assert | Test logrotate_user
   ansible.builtin.assert:
     that:

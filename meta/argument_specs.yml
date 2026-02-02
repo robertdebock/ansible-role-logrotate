@@ -28,6 +28,10 @@ argument_specs:
         type: bool
         description: "Use date extension on log file names"
         default: false
+      logrotate_create:
+        type: bool
+        description: "Enable the global `create` directive in /etc/logrotate.conf."
+        default: true
       logrotate_user:
         type: str
         description: "User for rotated log files. Automatically determined, but overridable."

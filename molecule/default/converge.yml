@@ -8,6 +8,7 @@
     logrotate_frequency: daily
     logrotate_keep: 7
     logrotate_compress: true
+    logrotate_create: false
     logrotate_entries:
       - name: example
         path: "/var/log/example/*.log"
