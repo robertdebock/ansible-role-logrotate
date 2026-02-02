@@ -63,3 +63,11 @@ argument_specs:
             type: list
             elements: str
             description: "Multiple log paths for one block. Mutually exclusive with path."
+          prerotate:
+            description: >
+              Commands to run before rotation. Single command (string) or list of
+              commands (list of strings); mutually exclusive type per entry.
+          postrotate:
+            description: >
+              Commands to run after rotation. Single command (string) or list of
+              commands (list of strings); mutually exclusive type per entry.

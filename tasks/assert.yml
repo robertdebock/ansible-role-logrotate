@@ -154,8 +154,12 @@
 - name: assert | Test postrotate in logrotate_entries
   ansible.builtin.assert:
     that:
-      - item.postrotate is string
-      - item.postrotate is not none
+      - >
+        (item.postrotate is string and item.postrotate is not none) or
+        (item.postrotate is sequence and item.postrotate is not string
+         and (item.postrotate | length) > 0
+         and (item.postrotate | reject("string") | list | length) == 0
+         and (item.postrotate | select("none") | list | length) == 0)
     quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:
@@ -166,8 +170,12 @@
 - name: assert | Test prerotate in logrotate_entries
   ansible.builtin.assert:
     that:
-      - item.prerotate is string
-      - item.prerotate is not none
+      - >
+        (item.prerotate is string and item.prerotate is not none) or
+        (item.prerotate is sequence and item.prerotate is not string
+         and (item.prerotate | length) > 0
+         and (item.prerotate | reject("string") | list | length) == 0
+         and (item.prerotate | select("none") | list | length) == 0)
     quiet: true
   loop: "{{ logrotate_entries }}"
   loop_control:

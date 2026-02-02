@@ -21,6 +21,66 @@
           - logrotate_prerotate_marker.stat.isreg
         quiet: true
 
+    - name: Stat list-form postrotate marker files
+      ansible.builtin.stat:
+        path: "{{ item }}"
+      register: logrotate_postrotate_list_markers
+      loop:
+        - /tmp/logrotate-postrotate-1
+        - /tmp/logrotate-postrotate-2
+
+    - name: Assert list-form postrotate marker files exist
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.isreg
+        quiet: true
+      loop: "{{ logrotate_postrotate_list_markers.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+
+    - name: Stat list-form prerotate marker files
+      ansible.builtin.stat:
+        path: "{{ item }}"
+      register: logrotate_prerotate_list_markers
+      loop:
+        - /tmp/logrotate-prerotate-list-1
+        - /tmp/logrotate-prerotate-list-2
+
+    - name: Assert list-form prerotate marker files exist
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.isreg
+        quiet: true
+      loop: "{{ logrotate_prerotate_list_markers.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+
+    - name: Read example-postrotate-list logrotate config
+      ansible.builtin.slurp:
+        src: /etc/logrotate.d/example-postrotate-list
+      register: example_postrotate_list_config
+
+    - name: Assert example-postrotate-list config contains both postrotate commands
+      ansible.builtin.assert:
+        that:
+          - (example_postrotate_list_config.content | b64decode) is search("touch /tmp/logrotate-postrotate-1")
+          - (example_postrotate_list_config.content | b64decode) is search("touch /tmp/logrotate-postrotate-2")
+        quiet: true
+
+    - name: Read example-prerotate-list logrotate config
+      ansible.builtin.slurp:
+        src: /etc/logrotate.d/example-prerotate-list
+      register: example_prerotate_list_config
+
+    - name: Assert example-prerotate-list config contains both prerotate commands
+      ansible.builtin.assert:
+        that:
+          - (example_prerotate_list_config.content | b64decode) is search("touch /tmp/logrotate-prerotate-list-1")
+          - (example_prerotate_list_config.content | b64decode) is search("touch /tmp/logrotate-prerotate-list-2")
+        quiet: true
+
     - name: Read example-paths logrotate config
       ansible.builtin.slurp:
         src: /etc/logrotate.d/example-paths

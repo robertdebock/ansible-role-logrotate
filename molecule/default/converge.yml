@@ -79,6 +79,16 @@
       - name: example-prerotate
         path: "/var/log/example-prerotate/*.log"
         prerotate: touch /tmp/logrotate-prerotate
+      - name: example-postrotate-list
+        path: "/var/log/example-postrotate-list/*.log"
+        postrotate:
+          - touch /tmp/logrotate-postrotate-1
+          - touch /tmp/logrotate-postrotate-2
+      - name: example-prerotate-list
+        path: "/var/log/example-prerotate-list/*.log"
+        prerotate:
+          - touch /tmp/logrotate-prerotate-list-1
+          - touch /tmp/logrotate-prerotate-list-2
       - name: example-paths
         paths:
           - "/var/log/example-paths/a.log"

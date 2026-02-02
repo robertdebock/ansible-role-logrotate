@@ -22,10 +22,12 @@
 {% endif -%}{% if item.dateformat is defined and item.dateformat %}    dateformat {{ item.dateformat }}
 {% endif -%}{% if item.dateyesterday is defined and item.dateyesterday %}    dateyesterday
 {% endif -%}{% if item.prerotate is defined %}    prerotate
-        {{ item.prerotate }}
-    endscript
+{%   set _prerotate_cmds = [item.prerotate] if item.prerotate is string else item.prerotate %}
+{%   for cmd in _prerotate_cmds %}        {{ cmd }}
+{%   endfor %}    endscript
 {% endif -%}{% if item.postrotate is defined %}    postrotate
-        {{ item.postrotate }}
-    endscript
+{%   set _postrotate_cmds = [item.postrotate] if item.postrotate is string else item.postrotate %}
+{%   for cmd in _postrotate_cmds %}        {{ cmd }}
+{%   endfor %}    endscript
 {% endif -%}
 }

@@ -92,6 +92,16 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       - name: example-prerotate
         path: "/var/log/example-prerotate/*.log"
         prerotate: touch /tmp/logrotate-prerotate
+      - name: example-postrotate-list
+        path: "/var/log/example-postrotate-list/*.log"
+        postrotate:
+          - touch /tmp/logrotate-postrotate-1
+          - touch /tmp/logrotate-postrotate-2
+      - name: example-prerotate-list
+        path: "/var/log/example-prerotate-list/*.log"
+        prerotate:
+          - touch /tmp/logrotate-prerotate-list-1
+          - touch /tmp/logrotate-prerotate-list-2
       - name: example-paths
         paths:
           - "/var/log/example-paths/a.log"
@@ -140,6 +150,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
         - /var/log/example-prerotate
+        - /var/log/example-postrotate-list
+        - /var/log/example-prerotate-list
         - /var/log/example-su
         - /var/log/example-paths
 
@@ -160,6 +172,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-sharedscripts/app.log
         - /var/log/example-dateyesterday/app.log
         - /var/log/example-prerotate/app.log
+        - /var/log/example-postrotate-list/app.log
+        - /var/log/example-prerotate-list/app.log
         - /var/log/example-su/app.log
         - /var/log/example-paths/a.log
         - /var/log/example-paths/b.log
