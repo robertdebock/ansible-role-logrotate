@@ -26,6 +26,7 @@
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
         - /var/log/example-prerotate
+        - /var/log/example-su
 
     - name: Create log file
       ansible.builtin.copy:
@@ -44,6 +45,7 @@
         - /var/log/example-sharedscripts/app.log
         - /var/log/example-dateyesterday/app.log
         - /var/log/example-prerotate/app.log
+        - /var/log/example-su/app.log
         - /var/log/btmp
         - /var/log/wtmp
         - /var/log/hawkey.log

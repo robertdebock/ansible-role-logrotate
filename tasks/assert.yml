@@ -296,6 +296,18 @@
   when:
     - item.dateyesterday is defined
 
+- name: assert | Test su in logrotate_entries
+  ansible.builtin.assert:
+    that:
+      - item.su is string
+      - item.su is not none
+    quiet: true
+  loop: "{{ logrotate_entries }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - item.su is defined
+
 - name: assert | Test logrotate_service_state
   ansible.builtin.assert:
     that:
