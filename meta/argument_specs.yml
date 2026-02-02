@@ -11,6 +11,11 @@ argument_specs:
         type: str
         description: "How often to rotate logs, either hourly, daily, weekly or monthly."
         default: "weekly"
+        choices:
+          - "hourly"
+          - "daily"
+          - "weekly"
+          - "monthly"
       logrotate_keep:
         type: int
         description: "How many files to keep."
