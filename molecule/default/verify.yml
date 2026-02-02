@@ -7,4 +7,16 @@
   tasks:
     - name: Run logrotate
       ansible.builtin.command:
-        cmd: logrotate /etc/logrotate.conf
+        cmd: logrotate -f /etc/logrotate.conf
+
+    - name: Stat prerotate marker file
+      ansible.builtin.stat:
+        path: /tmp/logrotate-prerotate
+      register: logrotate_prerotate_marker
+
+    - name: Assert prerotate marker file exists
+      ansible.builtin.assert:
+        that:
+          - logrotate_prerotate_marker.stat.exists
+          - logrotate_prerotate_marker.stat.isreg
+        quiet: true

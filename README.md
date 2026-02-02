@@ -44,7 +44,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         delaycompress: true
       - name: example-script
         path: "/var/log/example-script/*.log"
-        postrotate: killall -HUP some_process_name
+        postrotate: "true"  ## Normally this command would be `killall -HUP some_process_name`
       - name: btmp
         path: /var/log/btmp
         missingok: true
@@ -83,6 +83,9 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         state: present
         path: "/var/log/example-dateyesterday/*.log"
         dateyesterday: true
+      - name: example-prerotate
+        path: "/var/log/example-prerotate/*.log"
+        prerotate: touch /tmp/logrotate-prerotate
       - name: example-absent
         state: absent
       # Negative numbers work on some distributions: `error: example-negative:10 bad rotation count '-1'\`
@@ -124,6 +127,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-script
         - /var/log/example-sharedscripts
         - /var/log/example-dateyesterday
+        - /var/log/example-prerotate
 
     - name: Create log file
       ansible.builtin.copy:
@@ -141,6 +145,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
         - /var/log/example-script/app.log
         - /var/log/example-sharedscripts/app.log
         - /var/log/example-dateyesterday/app.log
+        - /var/log/example-prerotate/app.log
         - /var/log/btmp
         - /var/log/wtmp
         - /var/log/hawkey.log
