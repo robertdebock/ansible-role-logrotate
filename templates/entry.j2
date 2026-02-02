@@ -14,6 +14,7 @@
 {% endif -%}{% if item.copylog is defined and item.copylog %}    copy
 {% endif -%}{% if item.copytruncate is defined and item.copytruncate %}    copytruncate
 {% endif -%}{% if item.create is defined and item.create %}    create{% if item.create_mode is defined %} {{ item.create_mode }}{% endif -%}{% if item.create_user is defined %} {{ item.create_user }}{% endif -%}{% if item.create_group is defined %} {{ item.create_group }}{% endif -%}
+{{ '' }}
 {% endif -%}{% if item.sharedscripts is defined and item.sharedscripts %}    sharedscripts
 {% endif -%}{% if item.dateext is defined and item.dateext %}    dateext
 {% endif -%}{% if item.dateformat is defined and item.dateformat %}    dateformat {{ item.dateformat }}
