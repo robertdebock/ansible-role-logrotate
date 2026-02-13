@@ -208,8 +208,8 @@ logrotate_dateext: false
 logrotate_create: true
 
 # User/Group for rotated log files (Loaded by OS-Specific vars if found, or and can be set manually)
-logrotate_user: "{{ _logrotate_user[ansible_distribution] | default(_logrotate_user['default']) }}"
-logrotate_group: "{{ _logrotate_group[ansible_distribution] | default(_logrotate_group['default']) }}"
+logrotate_user: "{{ _logrotate_user[ansible_facts['distribution']] | default(_logrotate_user['default']) }}"
+logrotate_group: "{{ _logrotate_group[ansible_facts['distribution']] | default(_logrotate_group['default']) }}"
 
 # Set the state of the service
 logrotate_service_state: "started"
@@ -243,7 +243,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |container|tags|
 |---------|----|
 |[Alpine](https://hub.docker.com/r/robertdebock/alpine)|all|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
+|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
 |[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
